@@ -30,6 +30,7 @@ class Article extends Module implements BootstrapInterface
         $handler = $this->get('errorHandler');
         Yii::$app->set('errorHandler', $handler);
         $handler->register();
+        $this->layout = 'article';
         $this->registerTranslations();
     }
 

@@ -2,19 +2,18 @@
 
 namespace modava\article\controllers;
 
-use modava\article\components\MyUpload;
+use modava\article\Article as ModuleArticle;
 use Yii;
-use modava\article\models\Article;
-use modava\article\models\search\ArticleSearch;
+use modava\article\models\ArticleCategory;
+use modava\article\models\search\ArticleCategorySearch;
 use modava\article\components\MyArticleController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use modava\article\Article as ModuleArticle;
 
 /**
- * ArticleController implements the CRUD actions for Article model.
+ * ArticleCategoryController implements the CRUD actions for ArticleCategory model.
  */
-class ArticleController extends MyArticleController
+class ArticleCategoryController extends MyArticleController
 {
     /**
      * {@inheritdoc}
@@ -32,13 +31,14 @@ class ArticleController extends MyArticleController
     }
 
     /**
-     * Lists all Article models.
+     * Lists all ArticleCategory models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ArticleSearch();
+        $searchModel = new ArticleCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $dataProvider->pagination->pageSize = 1;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -47,7 +47,7 @@ class ArticleController extends MyArticleController
     }
 
     /**
-     * Displays a single Article model.
+     * Displays a single ArticleCategory model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,36 +60,29 @@ class ArticleController extends MyArticleController
     }
 
     /**
-     * Creates a new Article model.
+     * Creates a new ArticleCategory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Article();
+        $model = new ArticleCategory();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                if ($model->image != "") {
-                    $pathImage = FRONTEND_HOST_INFO . $model->image;
-                    $pathSave = Yii::getAlias('@frontend/web/uploads/article/');
-                    $pathUpload = MyUpload::upload(200, 200, $pathImage, $pathSave);
-                    $model->image = explode('frontend/web', $pathUpload)[1];
-                } else {
-                    $model->image = NOIMAGE;
-                }
-                $model->updateAttributes(['image']);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
+        } else {
+//            var_dump($model->getErrors());
+//            die;
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Article model.
+     * Updates an existing ArticleCategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -99,16 +92,8 @@ class ArticleController extends MyArticleController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->getAttribute('image') != $model->getOldAttribute('image')) {
-                $pathImage = FRONTEND_HOST_INFO . $model->image;
-                $pathSave = Yii::getAlias('@frontend/web/uploads/article/');
-                $pathUpload = MyUpload::upload(200, 200, $pathImage, $pathSave);
-                $model->image = explode('frontend/web', $pathUpload)[1];
-            }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -117,7 +102,7 @@ class ArticleController extends MyArticleController
     }
 
     /**
-     * Deletes an existing Article model.
+     * Deletes an existing ArticleCategory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -131,19 +116,18 @@ class ArticleController extends MyArticleController
     }
 
     /**
-     * Finds the Article model based on its primary key value.
+     * Finds the ArticleCategory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Article the loaded model
+     * @return ArticleCategory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Article::findOne($id)) !== null) {
+        if (($model = ArticleCategory::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException(ModuleArticle::t('article', 'The requested page does not exist.'));
     }
-
 }

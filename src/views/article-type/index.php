@@ -7,10 +7,11 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel modava\article\models\search\ArticleSearch */
+/* @var $searchModel modava\article\models\search\ArticleTypeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Article::t('article', 'Article');
+$this->params['breadcrumbs'][] = ['label' => Article::t('article', 'Article'), 'url' => ['/article']];
+$this->title = Article::t('article', 'Article type');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid px-xxl-25 px-xl-10">
@@ -25,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
            title="<?= Article::t('article', 'Create'); ?>">
             <i class="fa fa-plus"></i> <?= Article::t('article', 'Create'); ?></a>
     </div>
+    <!-- /Title -->
 
     <!-- Row -->
     <div class="row">
@@ -36,7 +38,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-sm">
                         <div class="table-wrap">
                             <div class="dataTables_wrapper dt-bootstrap4">
-
                                 <?= GridView::widget([
                                     'dataProvider' => $dataProvider,
                                     'layout' => '
@@ -85,77 +86,42 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ],
                                     'columns' => [
                                         [
-                                            'class' => 'yii\grid\SerialColumn',
+                                                'class' => 'yii\grid\SerialColumn',
                                             'header' => 'STT',
-                                            'headerOptions' => [
-                                                'width' => 50,
-                                            ],
-                                        ],
-                                        [
-                                            'attribute' => 'image',
-                                            'format' => 'html',
-                                            'value' => function ($model) {
-                                                return Html::img($model->image, ['height' => 50, 'width' => 50]);
-                                            },
-                                            'headerOptions' => [
-                                                'width' => 110,
-                                            ],
                                         ],
                                         'title',
-                                        [
-                                            'attribute' => 'category_id',
-                                            'value' => 'category.title',
-                                            'label' => 'Danh mục',
-                                        ],
-                                        [
-                                            'attribute' => 'type_id',
-                                            'value' => 'type.title',
-                                            'label' => 'Thể loại',
-                                        ],
-                                        //'description',
-                                        //'content:ntext',
+                                        'description:html',
                                         //'position',
                                         //'ads_pixel:ntext',
                                         //'ads_session:ntext',
-
-                                        //'views',
+                                        [
+                                            'attribute' => 'status',
+                                            'value' => function ($model) {
+                                                return \modava\article\helper\ArticleHelper::GetStatus($model->status);
+                                            }
+                                        ],
                                         'created_at:date',
                                         //'updated_at',
                                         [
                                             'attribute' => 'created_by',
                                             'value' => function ($model) {
-                                                return \modava\article\models\ArticleCategory::getUserAsArticleCategory($model->created_by);
-                                            },
-                                            'headerOptions' => [
-                                                'width' => 150,
-                                            ],
+                                                return \modava\article\models\ArticleType::getUserAsArticleType($model->created_by);
+                                            }
                                         ],
                                         //'updated_by',
-                                        [
-                                            'attribute' => 'status',
-                                            'value' => function ($model) {
-                                                return \modava\article\helper\ArticleHelper::GetStatus($model->status);
-                                            },
-                                            'headerOptions' => [
-                                                'width' => 130,
-                                            ],
-                                        ],
+
                                         [
                                             'class' => 'yii\grid\ActionColumn',
                                             'header' => Article::t('article', 'Actions'),
-                                            'headerOptions' => [
-                                                'width' => 130,
-                                            ],
                                         ],
                                     ],
                                 ]); ?>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <?php Pjax::end(); ?>
+
             </section>
         </div>
     </div>

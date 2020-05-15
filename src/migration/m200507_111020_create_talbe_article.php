@@ -33,8 +33,8 @@ class m200507_111020_create_talbe_article extends Migration
             'views' => $this->bigInteger(20)->null(),
             'created_at' => $this->integer(11)->notNull(),
             'updated_at' => $this->integer(11)->notNull(),
-            'created_by' => $this->smallInteger()->null(),
-            'updated_by' => $this->smallInteger()->null(),
+            'created_by' => $this->integer(11)->null(),
+            'updated_by' => $this->integer(11)->null(),
         ], $tableOptions);
 
         $this->addForeignKey("fk_article_category", "article", "type_id", "article_type", "id", "RESTRICT", "CASCADE");

@@ -29,8 +29,8 @@ class m200507_044352_create_talbe_type extends Migration
             'status' => $this->smallInteger(1)->notNull()->defaultValue(1),
             'created_at' => $this->integer(11)->notNull(),
             'updated_at' => $this->integer(11)->notNull(),
-            'created_by' => $this->smallInteger()->null(),
-            'updated_by' => $this->smallInteger()->null(),
+            'created_by' => $this->integer(11)->null(),
+            'updated_by' => $this->integer(11)->null(),
         ], $tableOptions);
 
         $this->createIndex('index-slug', 'article_type', 'slug');

@@ -30,8 +30,8 @@ class m200501_153918_create_table_category_article extends Migration
             'status' => $this->smallInteger(1)->notNull()->defaultValue(1),
             'created_at' => $this->integer(11)->notNull(),
             'updated_at' => $this->integer(11)->notNull(),
-            'created_by' => $this->smallInteger()->null(),
-            'updated_by' => $this->smallInteger()->null(),
+            'created_by' => $this->integer(11)->null(),
+            'updated_by' => $this->integer(11)->null(),
         ], $tableOptions);
 
         $this->createIndex('index-slug', 'article_category', 'slug');

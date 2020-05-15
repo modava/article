@@ -42,8 +42,8 @@ class m200507_111020_create_talbe_article extends Migration
         $this->createIndex('index-slug', 'article', 'slug');
         $this->addColumn('article', 'language', "ENUM('vi', 'en', 'jp') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'vi' COMMENT 'Language for yii2' AFTER `views`");
         $this->createIndex('index-language', 'article', 'language');
-        $this->addForeignKey('fk_article_user', 'article', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
-        $this->addForeignKey('fk_article_user', 'article', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
+        $this->addForeignKey('fk_article_created_by_user', 'article', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
+        $this->addForeignKey('fk_article_updated_by_user', 'article', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
     }
 
     /**

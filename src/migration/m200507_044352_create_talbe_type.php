@@ -34,8 +34,8 @@ class m200507_044352_create_talbe_type extends Migration
         ], $tableOptions);
 
         $this->createIndex('index-slug', 'article_type', 'slug');
-        $this->addForeignKey('fk_category_type_user', 'article_type', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
-        $this->addForeignKey('fk_category_type_user', 'article_type', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
+        $this->addForeignKey('fk_category_created_by_type_user', 'article_type', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
+        $this->addForeignKey('fk_category_updated_by_type_user', 'article_type', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
     }
 
     /**

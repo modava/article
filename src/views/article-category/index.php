@@ -95,19 +95,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                         [
                                             'attribute' => 'status',
                                             'value' => function ($model) {
-                                                return \modava\article\helper\ArticleHelper::GetStatus($model->status);
+                                                return Yii::$app->getModule('article')->params['status'][$model->status];
                                             }
                                         ],
-//                        'position',
+                                        //'position',
                                         //'ads_pixel:ntext',
                                         //'ads_session:ntext',
                                         'created_at:date',
                                         //'updated_at',
                                         [
                                             'attribute' => 'created_by',
-                                            'value' => function ($model) {
-                                                return \modava\article\models\ArticleCategory::getUserAsArticleCategory($model->created_by);
-                                            }
+                                            'value' => 'userCreated.userProfile.fullname',
                                         ],
                                         //'updated_by',
 

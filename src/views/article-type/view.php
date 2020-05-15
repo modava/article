@@ -55,22 +55,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'status',
                             'value' => function ($model) {
-                                return \modava\article\helper\ArticleHelper::GetStatus($model->status);
+                                return Yii::$app->getModule('article')->params['status'][$model->status];
                             }
                         ],
                         'created_at:datetime',
                         'updated_at:datetime',
                         [
-                            'attribute' => 'created_by',
-                            'value' => function ($model) {
-                                return ArticleType::getUserAsArticleType($model->created_by);
-                            }
+                            'attribute' => 'userCreated.userProfile.fullname',
+                            'label' => Article::t('article', 'Created By')
                         ],
                         [
-                            'attribute' => 'updated_by',
-                            'value' => function ($model) {
-                                return ArticleType::getUserAsArticleType($model->updated_by);
-                            }
+                            'attribute' => 'userUpdated.userProfile.fullname',
+                            'label' => Article::t('article', 'Updated By')
                         ],
                     ],
                 ]) ?>

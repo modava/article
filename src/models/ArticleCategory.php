@@ -2,6 +2,7 @@
 
 namespace modava\article\models;
 
+use common\models\User;
 use modava\article\Article;
 use modava\article\models\table\ActicleCategoryTable;
 use yii\behaviors\BlameableBehavior;
@@ -106,9 +107,23 @@ class ArticleCategory extends ActicleCategoryTable
         ];
     }
 
-
-    public static function getUserAsArticleCategory($UserId)
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserCreated()
     {
-        return 'Mong';
+        return $this->hasOne(User::class, ['id' => 'created_by']);
+    }
+
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserUpdated()
+    {
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 }

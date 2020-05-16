@@ -25,13 +25,13 @@ class ArticleModule extends Module implements BootstrapInterface
     public function init()
     {
         // custom initialization code goes here
+        $this->registerTranslations();
         parent::init();
         Yii::configure($this, require(__DIR__ . '/config/article.php'));
         $handler = $this->get('errorHandler');
         Yii::$app->set('errorHandler', $handler);
         $handler->register();
         $this->layout = 'article';
-        $this->registerTranslations();
     }
 
     public function bootstrap($app)

@@ -1,7 +1,6 @@
 <?php
 
-use modava\article\Article;
-use modava\article\models\ArticleType;
+use modava\article\ArticleModule;
 use modava\article\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -10,8 +9,8 @@ use yii\widgets\DetailView;
 /* @var $model modava\article\models\ArticleType */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Article::t('article', 'Article'), 'url' => ['/article']];
-$this->params['breadcrumbs'][] = ['label' => Article::t('article', 'Article type'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article'), 'url' => ['/article']];
+$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article type'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -24,11 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
         <p>
-            <?= Html::a(Article::t('article', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a(Article::t('article', 'Delete'), ['delete', 'id' => $model->id], [
+            <?= Html::a(ArticleModule::t('article', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(ArticleModule::t('article', 'Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
-                    'confirm' => Article::t('article', 'Are you sure you want to delete this item?'),
+                    'confirm' => ArticleModule::t('article', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
                 ],
             ]) ?>
@@ -62,11 +61,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'updated_at:datetime',
                         [
                             'attribute' => 'userCreated.userProfile.fullname',
-                            'label' => Article::t('article', 'Created By')
+                            'label' => ArticleModule::t('article', 'Created By')
                         ],
                         [
                             'attribute' => 'userUpdated.userProfile.fullname',
-                            'label' => Article::t('article', 'Updated By')
+                            'label' => ArticleModule::t('article', 'Updated By')
                         ],
                     ],
                 ]) ?>

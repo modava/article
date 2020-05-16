@@ -1,7 +1,7 @@
 <?php
 
 use modava\article\models\Article;
-use modava\article\Article as ArticleModule;
+use modava\article\ArticleModule;
 use modava\article\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\widgets\DetailView;

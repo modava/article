@@ -3,7 +3,7 @@
 use modava\article\models\table\ArticleTypeTable;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use modava\article\Article;
+use modava\article\ArticleModule;
 
 /* @var $this yii\web\View */
 /* @var $model modava\article\models\Article */
@@ -20,15 +20,15 @@ use modava\article\Article;
         <div class="col-4">
             <?= $form->field($model, 'category_id')
                 ->dropDownList(\yii\helpers\ArrayHelper::map(\modava\article\models\table\ActicleCategoryTable::getAllArticleCategory(), 'id', 'title'))
-                ->label('Danh mục') ?>
+                ->label(ArticleModule::t('article', 'Danh mục')) ?>
         </div>
         <div class="col-4">
             <?= $form->field($model, 'type_id')
                 ->dropDownList(\yii\helpers\ArrayHelper::map(ArticleTypeTable::getAllArticleType(), 'id', 'title'))
-                ->label('Thể loại') ?>
+                ->label(ArticleModule::t('article', 'Thể loại')) ?>
         </div>
         <div class="col-4">
-            <?= $form->field($model, 'language')->dropDownList(Yii::$app->params['availableLocales'])->label('Ngôn ngữ') ?>
+            <?= $form->field($model, 'language')->dropDownList(Yii::$app->params['availableLocales'])->label(ArticleModule::t('article', 'Ngôn ngữ')) ?>
         </div>
     </div>
 
@@ -44,7 +44,7 @@ use modava\article\Article;
     <?= \modava\tiny\FileManager::widget([
         'model' => $model,
         'attribute' => 'image',
-        'label' => 'Hình ảnh: 150x150px'
+        'label' => ArticleModule::t('article', 'Hình ảnh') . ': 150x150px'
     ]); ?>
 
     <?php if (Yii::$app->controller->action->id == 'create')
@@ -54,7 +54,7 @@ use modava\article\Article;
     <?= $form->field($model, 'status')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Article::t('article', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(ArticleModule::t('article', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

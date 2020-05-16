@@ -3,15 +3,15 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use modava\article\Article;
+use modava\article\ArticleModule;
 use modava\article\widgets\NavbarWidgets;
 
 /* @var $this yii\web\View */
 /* @var $searchModel modava\article\models\search */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->params['breadcrumbs'][] = ['label' => Article::t('article', 'Article'), 'url' => ['/article']];
-$this->title = Article::t('article', 'Article category');
+$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article'), 'url' => ['/article']];
+$this->title = ArticleModule::t('article', 'Article category');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid px-xxl-25 px-xl-10">
@@ -23,8 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
         <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
-           title="<?= Article::t('article', 'Create'); ?>">
-            <i class="fa fa-plus"></i> <?= Article::t('article', 'Create'); ?></a>
+           title="<?= ArticleModule::t('article', 'Create'); ?>">
+            <i class="fa fa-plus"></i> <?= ArticleModule::t('article', 'Create'); ?></a>
     </div>
     <!-- /Title -->
 
@@ -61,10 +61,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                 ',
                                     'pager' => [
-                                        'firstPageLabel' => Article::t('article', 'First'),
-                                        'lastPageLabel' => Article::t('article', 'Last'),
-                                        'prevPageLabel' => Article::t('article', 'Previous'),
-                                        'nextPageLabel' => Article::t('article', 'Next'),
+                                        'firstPageLabel' => ArticleModule::t('article', 'First'),
+                                        'lastPageLabel' => ArticleModule::t('article', 'Last'),
+                                        'prevPageLabel' => ArticleModule::t('article', 'Previous'),
+                                        'nextPageLabel' => ArticleModule::t('article', 'Next'),
                                         'maxButtonCount' => 5,
 
                                         'options' => [
@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                         [
                                             'class' => 'yii\grid\ActionColumn',
-                                            'header' => Article::t('article', 'Actions'),
+                                            'header' => ArticleModule::t('article', 'Actions'),
                                         ],
                                     ],
                                 ]); ?>

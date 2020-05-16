@@ -2,7 +2,7 @@
 
 namespace modava\article\controllers;
 
-use modava\article\Article as ModuleArticle;
+use modava\article\ArticleModule;
 use Yii;
 use modava\article\models\ArticleCategory;
 use modava\article\models\search\ArticleCategorySearch;
@@ -128,6 +128,6 @@ class ArticleCategoryController extends MyArticleController
             return $model;
         }
 
-        throw new NotFoundHttpException(ModuleArticle::t('article', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(ArticleModule::t('article', 'The requested page does not exist.'));
     }
 }

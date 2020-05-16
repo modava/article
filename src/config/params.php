@@ -6,13 +6,13 @@
  * Time: 4:42 PM
  */
 
-use modava\article\Article;
+use modava\article\ArticleModule;
 
 return [
     'articleName' => 'Article',
     'articleVersion' => '1.0',
     'status' => [
-        '0' => Article::t('article', 'Tạm ngưng'),
-        '1' => Article::t('article', 'Hiển thị'),
+        '0' => ArticleModule::t('article', 'Tạm ngưng'),
+        '1' => ArticleModule::t('article', 'Hiển thị'),
     ]
 ];

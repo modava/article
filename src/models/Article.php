@@ -6,7 +6,7 @@ use common\helpers\MyHelper;
 use common\models\User;
 use modava\article\models\table\ArticleTable;
 use Yii;
-use modava\article\Article as ArticleModule;
+use modava\article\ArticleModule;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\db\ActiveRecord;

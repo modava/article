@@ -2,13 +2,13 @@
 
 namespace modava\article\controllers;
 
+use modava\article\ArticleModule;
 use Yii;
 use modava\article\models\ArticleType;
 use modava\article\models\search\ArticleTypeSearch;
 use modava\article\components\MyArticleController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use modava\article\Article as ModuleArticle;
 
 /**
  * ArticleTypeController implements the CRUD actions for ArticleType model.
@@ -121,6 +121,6 @@ class ArticleTypeController extends MyArticleController
             return $model;
         }
 
-        throw new NotFoundHttpException(ModuleArticle::t('article', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(ArticleModule::t('article', 'The requested page does not exist.'));
     }
 }

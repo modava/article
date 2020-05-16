@@ -2,6 +2,7 @@
 
 namespace modava\article\controllers;
 
+use modava\article\ArticleModule;
 use modava\article\components\MyUpload;
 use Yii;
 use modava\article\models\Article;
@@ -9,7 +10,6 @@ use modava\article\models\search\ArticleSearch;
 use modava\article\components\MyArticleController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use modava\article\Article as ModuleArticle;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -143,7 +143,7 @@ class ArticleController extends MyArticleController
             return $model;
         }
 
-        throw new NotFoundHttpException(ModuleArticle::t('article', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(ArticleModule::t('article', 'The requested page does not exist.'));
     }
 
 }

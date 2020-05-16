@@ -2,13 +2,13 @@
 
 use modava\article\widgets\NavbarWidgets;
 use yii\helpers\Html;
-use modava\article\Article;
+use modava\article\ArticleModule;
 
 /* @var $this yii\web\View */
 /* @var $model modava\article\models\Article */
 
-$this->title = Article::t('article', 'Create');
-$this->params['breadcrumbs'][] = ['label' => Article::t('article', 'Article'), 'url' => ['index']];
+$this->title = ArticleModule::t('ArticleModule', 'Create');
+$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid px-xxl-25 px-xl-10">

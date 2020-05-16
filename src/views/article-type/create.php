@@ -1,15 +1,15 @@
 <?php
 
-use modava\article\Article;
+use modava\article\ArticleModule;
 use modava\article\widgets\NavbarWidgets;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model modava\article\models\ArticleType */
 
-$this->title = Article::t('article', 'Create type');
-$this->params['breadcrumbs'][] = ['label' => Article::t('article', 'Article'), 'url' => ['/article']];
-$this->params['breadcrumbs'][] = ['label' => Article::t('article', 'Article type'), 'url' => ['index']];
+$this->title = ArticleModule::t('article', 'Create type');
+$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article'), 'url' => ['/article']];
+$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article type'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid px-xxl-25 px-xl-10">

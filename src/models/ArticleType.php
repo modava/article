@@ -4,7 +4,7 @@ namespace modava\article\models;
 
 use common\helpers\MyHelper;
 use common\models\User;
-use modava\article\Article;
+use modava\article\ArticleModule;
 use modava\article\models\table\ArticleTypeTable;
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -80,19 +80,19 @@ class ArticleType extends ArticleTypeTable
     public function attributeLabels()
     {
         return [
-            'id' => Article::t('article', 'ID'),
-            'title' => Article::t('article', 'Title'),
-            'slug' => Article::t('article', 'Slug'),
-            'image' => Article::t('article', 'Image'),
-            'description' => Article::t('article', 'Description'),
-            'position' => Article::t('article', 'Position'),
-            'ads_pixel' => Article::t('article', 'Ads Pixel'),
-            'ads_session' => Article::t('article', 'Ads Session'),
-            'status' => Article::t('article', 'Status'),
-            'created_at' => Article::t('article', 'Created At'),
-            'updated_at' => Article::t('article', 'Updated At'),
-            'created_by' => Article::t('article', 'Created By'),
-            'updated_by' => Article::t('article', 'Updated By'),
+            'id' => ArticleModule::t('article', 'ID'),
+            'title' => ArticleModule::t('article', 'Title'),
+            'slug' => ArticleModule::t('article', 'Slug'),
+            'image' => ArticleModule::t('article', 'Image'),
+            'description' => ArticleModule::t('article', 'Description'),
+            'position' => ArticleModule::t('article', 'Position'),
+            'ads_pixel' => ArticleModule::t('article', 'Ads Pixel'),
+            'ads_session' => ArticleModule::t('article', 'Ads Session'),
+            'status' => ArticleModule::t('article', 'Status'),
+            'created_at' => ArticleModule::t('article', 'Created At'),
+            'updated_at' => ArticleModule::t('article', 'Updated At'),
+            'created_by' => ArticleModule::t('article', 'Created By'),
+            'updated_by' => ArticleModule::t('article', 'Updated By'),
         ];
     }
 

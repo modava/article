@@ -108,28 +108,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'label' => 'Danh mục',
                                         ],
                                         [
-                                            'attribute' => 'type_id',
-                                            'value' => 'type.title',
-                                            'label' => 'Thể loại',
-                                        ],
-                                        //'description',
-                                        //'content:ntext',
-                                        //'position',
-                                        //'ads_pixel:ntext',
-                                        //'ads_session:ntext',
-
-                                        //'views',
-                                        'created_at:date',
-                                        //'updated_at',
-                                        [
-                                            'attribute' => 'created_by',
-                                            'value' => 'userCreated.userProfile.fullname',
-                                            'headerOptions' => [
-                                                'width' => 150,
-                                            ],
-                                        ],
-                                        //'updated_by',
-                                        [
                                             'attribute' => 'status',
                                             'value' => function ($model) {
                                                 return Yii::$app->getModule('article')->params['status'][$model->status];
@@ -138,6 +116,44 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'width' => 130,
                                             ],
                                         ],
+                                        [
+                                            'attribute' => 'type_id',
+                                            'value' => 'type.title',
+                                            'label' => 'Thể loại',
+                                        ],
+                                        [
+                                            'attribute' => 'language',
+                                            'value' => function ($model) {
+                                                return Yii::$app->getModule('article')->params['availableLocales'][$model->language];
+                                            },
+                                            'headerOptions' => [
+                                                'width' => 150,
+                                            ],
+                                        ],
+                                        //'description',
+                                        //'content:ntext',
+                                        //'position',
+                                        //'ads_pixel:ntext',
+                                        //'ads_session:ntext',
+
+                                        //'views',
+
+                                        //'updated_at',
+                                        [
+                                            'attribute' => 'created_by',
+                                            'value' => 'userCreated.userProfile.fullname',
+                                            'headerOptions' => [
+                                                'width' => 150,
+                                            ],
+                                        ],
+                                        [
+                                            'attribute' => 'created_at',
+                                            'format' => 'date',
+                                            'headerOptions' => [
+                                                'width' => 150,
+                                            ],
+                                        ],
+                                        //'updated_by',
                                         [
                                             'class' => 'yii\grid\ActionColumn',
                                             'header' => ArticleModule::t('article', 'Actions'),

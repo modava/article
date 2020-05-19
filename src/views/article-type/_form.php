@@ -13,7 +13,14 @@ use modava\article\ArticleModule;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-8">
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-4">
+            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getModule('article')->params['availableLocales'])->label(ArticleModule::t('article', 'Ngôn ngữ')) ?>
+        </div>
+    </div>
 
     <?= $form->field($model, 'description')->widget(\modava\tiny\TinyMce::class, [
         'options' => ['rows' => 10],

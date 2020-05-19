@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model modava\article\models\ArticleType */
 
-$this->title = ArticleModule::t('article', 'Create type');
+$this->title = ArticleModule::t('article', 'Create');
 $this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article'), 'url' => ['/article']];
 $this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article type'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;

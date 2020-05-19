@@ -18,6 +18,9 @@ use modava\article\ArticleModule;
 
     <div class="row">
         <div class="col-4">
+            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getModule('article')->params['availableLocales'])->label(ArticleModule::t('article', 'Ngôn ngữ')) ?>
+        </div>
+        <div class="col-4">
             <?= $form->field($model, 'category_id')
                 ->dropDownList(\yii\helpers\ArrayHelper::map(\modava\article\models\table\ActicleCategoryTable::getAllArticleCategory(), 'id', 'title'))
                 ->label(ArticleModule::t('article', 'Danh mục')) ?>
@@ -26,9 +29,6 @@ use modava\article\ArticleModule;
             <?= $form->field($model, 'type_id')
                 ->dropDownList(\yii\helpers\ArrayHelper::map(ArticleTypeTable::getAllArticleType(), 'id', 'title'))
                 ->label(ArticleModule::t('article', 'Thể loại')) ?>
-        </div>
-        <div class="col-4">
-            <?= $form->field($model, 'language')->dropDownList(Yii::$app->params['availableLocales'])->label(ArticleModule::t('article', 'Ngôn ngữ')) ?>
         </div>
     </div>
 

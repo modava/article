@@ -23,6 +23,7 @@ use yii\db\ActiveRecord;
  * @property string|null $ads_pixel
  * @property string|null $ads_session
  * @property int $status
+ * @property string $language Language
  * @property int $created_at
  * @property int $updated_at
  * @property int|null $created_by
@@ -68,7 +69,8 @@ class ArticleType extends ArticleTypeTable
         return [
             [['title'], 'required'],
             [['position', 'status'], 'integer'],
-            [['ads_pixel', 'ads_session'], 'string'],
+            [['ads_pixel', 'ads_session', 'language'], 'string'],
+            ['language','in','range'=>['vi','en','jp'],'strict'=>false],
             [['title', 'slug', 'image', 'description'], 'string', 'max' => 255],
             [['slug'], 'unique'],
         ];
@@ -89,6 +91,7 @@ class ArticleType extends ArticleTypeTable
             'ads_pixel' => ArticleModule::t('article', 'Ads Pixel'),
             'ads_session' => ArticleModule::t('article', 'Ads Session'),
             'status' => ArticleModule::t('article', 'Status'),
+            'language' => ArticleModule::t('article', 'Language'),
             'created_at' => ArticleModule::t('article', 'Created At'),
             'updated_at' => ArticleModule::t('article', 'Updated At'),
             'created_by' => ArticleModule::t('article', 'Created By'),

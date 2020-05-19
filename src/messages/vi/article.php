@@ -22,5 +22,9 @@ return [
     'Article type' => 'Thể loại',
     'Update type: {name}' => 'Cập nhật thể loại: {name}',
     'Content' => 'Nội dung',
-    'Language' => 'Ngôn ngữ'
+    'Language' => 'Ngôn ngữ',
+    'First' => 'Đầu',
+    'Last' => 'Cuối',
+    'Previous' => 'Trước',
+    'Next' => 'Tiếp',
 ];

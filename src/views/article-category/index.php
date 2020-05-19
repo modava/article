@@ -88,6 +88,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         [
                                             'class' => 'yii\grid\SerialColumn',
                                             'header' => 'STT',
+                                            'headerOptions' => [
+                                                'width' => 70,
+                                            ],
                                         ],
 
                                         'title',
@@ -96,22 +99,46 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'attribute' => 'status',
                                             'value' => function ($model) {
                                                 return Yii::$app->getModule('article')->params['status'][$model->status];
-                                            }
+                                            },
+                                            'headerOptions' => [
+                                                'width' => 150,
+                                            ],
+                                        ],
+                                        [
+                                            'attribute' => 'language',
+                                            'value' => function ($model) {
+                                                return Yii::$app->getModule('article')->params['availableLocales'][$model->language];
+                                            },
+                                            'headerOptions' => [
+                                                'width' => 150,
+                                            ],
                                         ],
                                         //'position',
                                         //'ads_pixel:ntext',
                                         //'ads_session:ntext',
-                                        'created_at:date',
                                         //'updated_at',
                                         [
                                             'attribute' => 'created_by',
                                             'value' => 'userCreated.userProfile.fullname',
+                                            'headerOptions' => [
+                                                'width' => 150,
+                                            ],
+                                        ],
+                                        [
+                                            'attribute' => 'created_at',
+                                            'format' => 'date',
+                                            'headerOptions' => [
+                                                'width' => 150,
+                                            ],
                                         ],
                                         //'updated_by',
 
                                         [
                                             'class' => 'yii\grid\ActionColumn',
                                             'header' => ArticleModule::t('article', 'Actions'),
+                                            'headerOptions' => [
+                                                'width' => 150,
+                                            ],
                                         ],
                                     ],
                                 ]); ?>

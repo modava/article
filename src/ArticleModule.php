@@ -60,5 +60,4 @@ class ArticleModule extends Module implements BootstrapInterface
     {
         return Yii::t('article/messages/' . $category, $message, $params, $language);
     }
-
 }

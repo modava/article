@@ -34,7 +34,9 @@ class m200501_153918_create_table_category_article extends Migration
             'updated_by' => $this->integer(11)->null(),
         ], $tableOptions);
 
+        $this->addColumn('article_category', 'language', "ENUM('vi', 'en', 'jp') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'vi' COMMENT 'Language' AFTER `status`");
         $this->createIndex('index-slug', 'article_category', 'slug');
+        $this->createIndex('index-language', 'article_category', 'language');
         $this->addForeignKey('fk_category_created_by_article_user', 'article_category', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
         $this->addForeignKey('fk_category_updated_by_article_user', 'article_category', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
     }

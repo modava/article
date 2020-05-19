@@ -33,7 +33,9 @@ class m200507_044352_create_talbe_type extends Migration
             'updated_by' => $this->integer(11)->null(),
         ], $tableOptions);
 
+        $this->addColumn('article_type', 'language', "ENUM('vi', 'en', 'jp') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'vi' COMMENT 'Language' AFTER `status`");
         $this->createIndex('index-slug', 'article_type', 'slug');
+        $this->createIndex('index-language', 'article_type', 'language');
         $this->addForeignKey('fk_category_created_by_type_user', 'article_type', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
         $this->addForeignKey('fk_category_updated_by_type_user', 'article_type', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');
     }

@@ -23,6 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
         <p>
+            <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
+               title="<?= ArticleModule::t('article', 'Create'); ?>">
+                <i class="fa fa-plus"></i> <?= ArticleModule::t('article', 'Create'); ?></a>
             <?= Html::a(ArticleModule::t('article', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(ArticleModule::t('article', 'Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',

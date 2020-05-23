@@ -3,7 +3,6 @@
 namespace modava\article\controllers;
 
 use modava\article\ArticleModule;
-use Mpdf\Tag\P;
 use Yii;
 use modava\article\models\ArticleCategory;
 use modava\article\models\search\ArticleCategorySearch;
@@ -110,7 +109,6 @@ class ArticleCategoryController extends MyArticleController
         if ($model->load(Yii::$app->request->post())) {
             if($model->validate() && $model->save()) {
                 Yii::$app->session->setFlash('toastr-article-category-view', [
-                    'title' => 'abc',
                     'text' => 'Cập nhật thành công',
                     'type' => 'success'
                 ]);

@@ -14,6 +14,7 @@ return [
         'en' => 'English',
         'jp' => 'Japan',
     ],
+    'defaultLocales' => 'vi',
     'articleName' => 'Article',
     'articleVersion' => '1.0',
     'status' => [

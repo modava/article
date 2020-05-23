@@ -4,12 +4,17 @@ namespace modava\article\controllers;
 
 use modava\article\ArticleModule;
 use modava\article\components\MyUpload;
+use modava\article\models\table\ActicleCategoryTable;
+use modava\article\models\table\ArticleTypeTable;
 use Yii;
 use modava\article\models\Article;
 use modava\article\models\search\ArticleSearch;
 use modava\article\components\MyArticleController;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -68,8 +73,8 @@ class ArticleController extends MyArticleController
     {
         $model = new Article();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate() && $model->save()) {
                 if ($model->image != "") {
                     $pathImage = FRONTEND_HOST_INFO . $model->image;
                     $pathSave = Yii::getAlias('@frontend/web/uploads/article/');
@@ -79,7 +84,21 @@ class ArticleController extends MyArticleController
                     $model->image = NOIMAGE;
                 }
                 $model->updateAttributes(['image']);
+                Yii::$app->session->setFlash('toastr-article-view', [
+                    'text' => 'Tạo mới thành công',
+                    'type' => 'success'
+                ]);
                 return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                $errors = '';
+                foreach ($model->getErrors() as $error) {
+                    $errors .= Html::tag('p', $error[0]);
+                }
+                Yii::$app->session->setFlash('toastr-article-form', [
+                    'title' => 'Cập nhật thất bại',
+                    'text' => $errors,
+                    'type' => 'warning'
+                ]);
             }
         }
 
@@ -100,14 +119,30 @@ class ArticleController extends MyArticleController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->getAttribute('image') != $model->getOldAttribute('image')) {
-                $pathImage = FRONTEND_HOST_INFO . $model->image;
-                $pathSave = Yii::getAlias('@frontend/web/uploads/article/');
-                $pathUpload = MyUpload::upload(200, 200, $pathImage, $pathSave);
-                $model->image = explode('frontend/web', $pathUpload)[1];
-            }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if($model->validate()) {
+                if ($model->getAttribute('image') != $model->getOldAttribute('image')) {
+                    $pathImage = FRONTEND_HOST_INFO . $model->image;
+                    $pathSave = Yii::getAlias('@frontend/web/uploads/article/');
+                    $pathUpload = MyUpload::upload(200, 200, $pathImage, $pathSave);
+                    $model->image = explode('frontend/web', $pathUpload)[1];
+                }
+                if ($model->save()) {
+                    Yii::$app->session->setFlash('toastr-article-view', [
+                        'text' => 'Cập nhật thành công',
+                        'type' => 'success'
+                    ]);
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $errors = '';
+                foreach ($model->getErrors() as $error) {
+                    $errors .= Html::tag('p', $error[0]);
+                }
+                Yii::$app->session->setFlash('toastr-article-form', [
+                    'title' => 'Cập nhật thất bại',
+                    'text' => $errors,
+                    'type' => 'warning'
+                ]);
             }
         }
 
@@ -146,4 +181,16 @@ class ArticleController extends MyArticleController
         throw new NotFoundHttpException(ArticleModule::t('article', 'The requested page does not exist.'));
     }
 
+
+    public function actionLoadCategoriesByLang($lang = null)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return ArrayHelper::map(ActicleCategoryTable::getAllArticleCategory($lang), 'id', 'title');
+    }
+
+    public function actionLoadTypesByLang($lang = null)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return ArrayHelper::map(ArticleTypeTable::getAllArticleType($lang), 'id', 'title');
+    }
 }

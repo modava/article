@@ -23,7 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </h4>
         <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
            title="<?= ArticleModule::t('article', 'Create'); ?>">
-            <i class="fa fa-plus"></i> <?= ArticleModule::t('article', 'Create'); ?></a>
+            <i class="fa fa-plus"></i> <?= ArticleModule::t('article', 'Create'); ?>
+        </a>
     </div>
 
     <!-- Row -->

@@ -8,7 +8,7 @@ use modava\article\ArticleModule;
 /* @var $model modava\article\models\ArticleCategory */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<?= \backend\widgets\ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
 <div class="article-category-form">
 
     <?php $form = ActiveForm::begin(); ?>

@@ -31,6 +31,8 @@ use yii\db\ActiveRecord;
  */
 class ArticleType extends ArticleTypeTable
 {
+    public $toastr_key = 'article-type';
+
     public function behaviors()
     {
 
@@ -70,7 +72,7 @@ class ArticleType extends ArticleTypeTable
             [['title'], 'required'],
             [['position', 'status'], 'integer'],
             [['ads_pixel', 'ads_session', 'language'], 'string'],
-            ['language','in','range'=>['vi','en','jp'],'strict'=>false],
+            ['language', 'in', 'range' => ['vi', 'en', 'jp'], 'strict' => false],
             [['title', 'slug', 'image', 'description'], 'string', 'max' => 255],
             [['slug'], 'unique'],
         ];

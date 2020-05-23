@@ -32,6 +32,7 @@ use Yii;
  */
 class ArticleCategory extends ActicleCategoryTable
 {
+    public $toastr_key = 'article-category';
     public function behaviors()
     {
 

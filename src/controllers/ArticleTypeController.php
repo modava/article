@@ -7,6 +7,7 @@ use Yii;
 use modava\article\models\ArticleType;
 use modava\article\models\search\ArticleTypeSearch;
 use modava\article\components\MyArticleController;
+use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -66,8 +67,26 @@ class ArticleTypeController extends MyArticleController
     public function actionCreate()
     {
         $model = new ArticleType();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->validate() && $model->save()) {
+                Yii::$app->session->setFlash('toastr-article-type-view', [
+                    'text' => 'Tạo mới thành công',
+                    'type' => 'success'
+                ]);
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                $errors = '';
+                foreach ($model->getErrors() as $error) {
+                    $errors .= Html::tag('p', $error[0]);
+                }
+                Yii::$app->session->setFlash('toastr-article-type-form', [
+                    'title' => 'Cập nhật thất bại',
+                    'text' => $errors,
+                    'type' => 'warning'
+                ]);
+//            var_dump($model->getErrors());
+//            die;
+            }
         }
 
         return $this->render('create', [
@@ -86,8 +105,24 @@ class ArticleTypeController extends MyArticleController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if($model->validate() && $model->save()) {
+                Yii::$app->session->setFlash('toastr-article-type-view', [
+                    'text' => 'Cập nhật thành công',
+                    'type' => 'success'
+                ]);
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                $errors = '';
+                foreach ($model->getErrors() as $error) {
+                    $errors .= Html::tag('p', $error[0]);
+                }
+                Yii::$app->session->setFlash('toastr-article-type-form', [
+                    'title' => 'Cập nhật thất bại',
+                    'text' => $errors,
+                    'type' => 'warning'
+                ]);
+            }
         }
 
         return $this->render('update', [

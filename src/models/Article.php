@@ -38,7 +38,7 @@ use yii\db\ActiveRecord;
  */
 class Article extends ArticleTable
 {
-
+    public $toastr_key = 'article';
     public function behaviors()
     {
 

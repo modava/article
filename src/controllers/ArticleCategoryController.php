@@ -7,6 +7,7 @@ use Yii;
 use modava\article\models\ArticleCategory;
 use modava\article\models\search\ArticleCategorySearch;
 use modava\article\components\MyArticleController;
+use yii\db\Exception;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -72,17 +73,18 @@ class ArticleCategoryController extends MyArticleController
         if ($model->load(Yii::$app->request->post())) {
             if($model->validate() && $model->save()) {
                 Yii::$app->session->setFlash('toastr-article-category-view', [
+                    'title' => 'Thông báo',
                     'text' => 'Tạo mới thành công',
                     'type' => 'success'
                 ]);
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
-                $errors = '';
+                $errors = Html::tag('p', 'Tạo mới thất bại');
                 foreach ($model->getErrors() as $error) {
                     $errors .= Html::tag('p', $error[0]);
                 }
                 Yii::$app->session->setFlash('toastr-article-category-form', [
-                    'title' => 'Cập nhật thất bại',
+                    'title' => 'Thông báo',
                     'text' => $errors,
                     'type' => 'warning'
                 ]);
@@ -109,17 +111,18 @@ class ArticleCategoryController extends MyArticleController
         if ($model->load(Yii::$app->request->post())) {
             if($model->validate() && $model->save()) {
                 Yii::$app->session->setFlash('toastr-article-category-view', [
+                    'title' => 'Thông báo',
                     'text' => 'Cập nhật thành công',
                     'type' => 'success'
                 ]);
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
-                $errors = '';
+                $errors = Html::tag('p', 'Cập nhật thất bại');
                 foreach ($model->getErrors() as $error) {
                     $errors .= Html::tag('p', $error[0]);
                 }
                 Yii::$app->session->setFlash('toastr-article-category-form', [
-                    'title' => 'Cập nhật thất bại',
+                    'title' => 'Thông báo',
                     'text' => $errors,
                     'type' => 'warning'
                 ]);
@@ -140,8 +143,24 @@ class ArticleCategoryController extends MyArticleController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        if ($model->delete()) {
+            Yii::$app->session->setFlash('toastr-article-category-index', [
+                'title' => 'Thông báo',
+                'text' => 'Xoá thành công',
+                'type' => 'success'
+            ]);
+        } else {
+            $errors = Html::tag('p', 'Xoá thất bại');
+            foreach ($model->getErrors() as $error) {
+                $errors .= Html::tag('p', $error[0]);
+            }
+            Yii::$app->session->setFlash('toastr-article-category-index', [
+                'title' => 'Thông báo',
+                'text' => $errors,
+                'type' => 'warning'
+            ]);
+        }
         return $this->redirect(['index']);
     }
 

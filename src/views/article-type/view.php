@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Articl
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<?= \backend\widgets\ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-view']) ?>
+<?php \backend\widgets\ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-view']) ?>
 <div class="container-fluid px-xxl-25 px-xl-10">
     <?= NavbarWidgets::widget(); ?>
 

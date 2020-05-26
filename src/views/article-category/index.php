@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Articl
 $this->title = ArticleModule::t('article', 'Article category');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php \backend\widgets\ToastrWidget::widget(['key' => 'toastr-' . $searchModel->toastr_key . '-index']) ?>
 <div class="container-fluid px-xxl-25 px-xl-10">
     <?= NavbarWidgets::widget(); ?>
 

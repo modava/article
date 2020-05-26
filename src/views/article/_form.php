@@ -14,7 +14,7 @@ use modava\article\models\table\ActicleCategoryTable;
 
 if ($model->language == null) $model->language = Yii::$app->getModule('article')->params['defaultLocales'];
 ?>
-<?= \backend\widgets\ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
+<?php \backend\widgets\ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
     <div class="article-form">
 
         <?php $form = ActiveForm::begin(); ?>

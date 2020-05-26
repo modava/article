@@ -85,17 +85,18 @@ class ArticleController extends MyArticleController
                 }
                 $model->updateAttributes(['image']);
                 Yii::$app->session->setFlash('toastr-article-view', [
+                    'title' => 'Thông báo',
                     'text' => 'Tạo mới thành công',
                     'type' => 'success'
                 ]);
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
-                $errors = '';
+                $errors = Html::tag('p', 'Tạo mới thất bại');
                 foreach ($model->getErrors() as $error) {
                     $errors .= Html::tag('p', $error[0]);
                 }
                 Yii::$app->session->setFlash('toastr-article-form', [
-                    'title' => 'Cập nhật thất bại',
+                    'title' => 'Thông báo',
                     'text' => $errors,
                     'type' => 'warning'
                 ]);
@@ -128,18 +129,19 @@ class ArticleController extends MyArticleController
                 }
                 if ($model->save()) {
                     Yii::$app->session->setFlash('toastr-article-view', [
+                        'title' => 'Thông báo',
                         'text' => 'Cập nhật thành công',
                         'type' => 'success'
                     ]);
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {
-                $errors = '';
+                $errors = Html::tag('p', 'Cập nhật thất bại');
                 foreach ($model->getErrors() as $error) {
                     $errors .= Html::tag('p', $error[0]);
                 }
                 Yii::$app->session->setFlash('toastr-article-form', [
-                    'title' => 'Cập nhật thất bại',
+                    'title' => 'Thông báo',
                     'text' => $errors,
                     'type' => 'warning'
                 ]);
@@ -160,8 +162,24 @@ class ArticleController extends MyArticleController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        if ($model->delete()) {
+            Yii::$app->session->setFlash('toastr-article-index', [
+                'title' => 'Thông báo',
+                'text' => 'Xoá thành công',
+                'type' => 'success'
+            ]);
+        } else {
+            $errors = Html::tag('p', 'Xoá thất bại');
+            foreach ($model->getErrors() as $error) {
+                $errors .= Html::tag('p', $error[0]);
+            }
+            Yii::$app->session->setFlash('toastr-article-index', [
+                'title' => 'Thông báo',
+                'text' => $errors,
+                'type' => 'warning'
+            ]);
+        }
         return $this->redirect(['index']);
     }
 

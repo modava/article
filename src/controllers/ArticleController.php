@@ -74,29 +74,38 @@ class ArticleController extends MyArticleController
         $model = new Article();
 
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate() && $model->save()) {
-                if ($model->image != "") {
-                    $pathImage = FRONTEND_HOST_INFO . $model->image;
-                    $pathSave = Yii::getAlias('@frontend/web/uploads/article/');
-                    $pathUpload = MyUpload::upload(200, 200, $pathImage, $pathSave);
-                    $model->image = explode('frontend/web', $pathUpload)[1];
-                } else {
-                    $model->image = NOIMAGE;
+            if ($model->validate()) {
+                if ($model->save()) {
+                    if ($model->image != "") {
+                        $pathImage = FRONTEND_HOST_INFO . $model->image;
+                        $path = Yii::getAlias('@frontend/web/uploads/article/');
+                        $imageName = null;
+                        foreach (Yii::$app->params['article'] as $key => $value) {
+                            $pathSave = $path . $key;
+                            if (!file_exists($pathSave) && !is_dir($pathSave)) {
+                                mkdir($pathSave);
+                            }
+                            $imageName = MyUpload::uploadFromOnline($value['width'], $value['height'], $pathImage, $pathSave . '/', $imageName);
+                        }
+
+                    } else {
+                        $imageName = NOIMAGE;
+                    }
+                    $model->image = $imageName;
+                    $model->updateAttributes(['image']);
+                    Yii::$app->session->setFlash('toastr-article-view', [
+                        'text' => 'Tạo mới thành công',
+                        'type' => 'success'
+                    ]);
+                    return $this->redirect(['view', 'id' => $model->id]);
                 }
-                $model->updateAttributes(['image']);
-                Yii::$app->session->setFlash('toastr-article-view', [
-                    'title' => 'Thông báo',
-                    'text' => 'Tạo mới thành công',
-                    'type' => 'success'
-                ]);
-                return $this->redirect(['view', 'id' => $model->id]);
             } else {
-                $errors = Html::tag('p', 'Tạo mới thất bại');
+                $errors = '';
                 foreach ($model->getErrors() as $error) {
                     $errors .= Html::tag('p', $error[0]);
                 }
                 Yii::$app->session->setFlash('toastr-article-form', [
-                    'title' => 'Thông báo',
+                    'title' => 'Cập nhật thất bại',
                     'text' => $errors,
                     'type' => 'warning'
                 ]);
@@ -120,28 +129,53 @@ class ArticleController extends MyArticleController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            if($model->validate()) {
-                if ($model->getAttribute('image') != $model->getOldAttribute('image')) {
-                    $pathImage = FRONTEND_HOST_INFO . $model->image;
-                    $pathSave = Yii::getAlias('@frontend/web/uploads/article/');
-                    $pathUpload = MyUpload::upload(200, 200, $pathImage, $pathSave);
-                    $model->image = explode('frontend/web', $pathUpload)[1];
-                }
+            if ($model->validate()) {
+                $oldImage = $model->getOldAttribute('image');
                 if ($model->save()) {
+                    if ($model->getAttribute('image') !== $oldImage) {
+                        if ($model->getAttribute('image') == '') {
+                            $model->image = 'no-image.png';
+                            $model->updateAttributes(['image']);
+                        } else {
+                            $pathImage = FRONTEND_HOST_INFO . $model->image;
+                            $path = Yii::getAlias('@frontend/web/uploads/article/');
+                            $imageName = null;
+                            foreach (Yii::$app->params['article'] as $key => $value) {
+                                $pathSave = $path . $key;
+                                if (!file_exists($pathSave) && !is_dir($pathSave)) {
+                                    mkdir($pathSave);
+                                }
+                                $resultName = MyUpload::uploadFromOnline($value['width'], $value['height'], $pathImage, $pathSave . '/', $imageName);
+                                if ($imageName == null) {
+                                    $imageName = $resultName;
+                                }
+                            }
+
+                            $model->image = $imageName;
+                            if ($model->updateAttributes(['image'])) {
+                                foreach (Yii::$app->params['article'] as $key => $value) {
+                                    $pathSave = $path . $key;
+                                    if (file_exists($pathSave . '/' . $oldImage) && $oldImage != null) {
+                                        unlink($pathSave . '/' . $oldImage);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
                     Yii::$app->session->setFlash('toastr-article-view', [
-                        'title' => 'Thông báo',
                         'text' => 'Cập nhật thành công',
                         'type' => 'success'
                     ]);
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {
-                $errors = Html::tag('p', 'Cập nhật thất bại');
+                $errors = '';
                 foreach ($model->getErrors() as $error) {
                     $errors .= Html::tag('p', $error[0]);
                 }
-                Yii::$app->session->setFlash('toastr-article-form', [
-                    'title' => 'Thông báo',
+                Yii::$app->session->setFlash('toastr-product-form', [
+                    'title' => 'Cập nhật thất bại',
                     'text' => $errors,
                     'type' => 'warning'
                 ]);

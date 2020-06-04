@@ -97,13 +97,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'attribute' => 'image',
                                             'format' => 'html',
                                             'value' => function ($model) {
-                                                return Html::img($model->image, ['height' => 50, 'width' => 50]);
+                                                if ($model->image == null)
+                                                    return null;
+                                                return Html::img(Yii::$app->params['article']['150x150']['folder'] . $model->image, ['width' => 150, 'height' => 150]);
                                             },
                                             'headerOptions' => [
                                                 'width' => 110,
                                             ],
                                         ],
-                                        'title',
+                                        [
+                                            'attribute' => 'title',
+                                            'format' => 'raw',
+                                            'value' => function ($model) {
+                                                return Html::a($model->title, ['view', 'id' => $model->id], [
+                                                    'title' => $model->title,
+                                                    'data-pjax' => 0,
+                                                ]);
+                                            }
+                                        ],
                                         [
                                             'attribute' => 'category_id',
                                             'value' => 'category.title',
@@ -159,6 +170,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         [
                                             'class' => 'yii\grid\ActionColumn',
                                             'header' => ArticleModule::t('article', 'Actions'),
+                                            'template' => '{update} {delete}',
                                             'headerOptions' => [
                                                 'width' => 130,
                                             ],

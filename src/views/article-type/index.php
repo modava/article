@@ -93,7 +93,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'width' => 150,
                                             ],
                                         ],
-                                        'title',
+                                        [
+                                            'attribute' => 'title',
+                                            'format' => 'raw',
+                                            'value' => function ($model) {
+                                                return Html::a($model->title, ['view', 'id' => $model->id], [
+                                                    'title' => $model->title,
+                                                    'data-pjax' => 0,
+                                                ]);
+                                            }
+                                        ],
                                         'description:html',
                                         //'position',
                                         //'ads_pixel:ntext',
@@ -136,6 +145,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         [
                                             'class' => 'yii\grid\ActionColumn',
                                             'header' => ArticleModule::t('article', 'Actions'),
+                                            'template' => '{update} {delete}',
                                             'headerOptions' => [
                                                 'width' => 150,
                                             ],

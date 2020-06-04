@@ -50,10 +50,16 @@ if ($model->language == null) $model->language = Yii::$app->getModule('article')
             'type' => 'content',
         ]) ?>
 
-        <?= \modava\tiny\FileManager::widget([
+        <?php
+        if (empty($model->getErrors()))
+            $path = Yii::$app->params['article']['150x150']['folder'];
+        else
+            $path = null;
+        echo \modava\tiny\FileManager::widget([
             'model' => $model,
             'attribute' => 'image',
-            'label' => ArticleModule::t('article', 'Hình ảnh') . ': 150x150px'
+            'path' => $path,
+            'label' => ArticleModule::t('article', 'Hình ảnh') . ': ' . Yii::$app->params['article-size'],
         ]); ?>
 
         <?php if (Yii::$app->controller->action->id == 'create')

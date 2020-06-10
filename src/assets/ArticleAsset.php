@@ -9,14 +9,17 @@ use yii\web\AssetBundle;
  */
 class ArticleAsset extends AssetBundle
 {
-    public $sourcePath = '@articleweb';
+    public $sourcePath = '@backendWeb';
     public $css = [
         'vendors/datatables.net-dt/css/jquery.dataTables.min.css',
         'vendors/bootstrap/dist/css/bootstrap.min.css',
-        'css/customArticle.css',
+        "vendors/jquery-toggles/css/toggles.css",
+        "vendors/jquery-toggles/css/themes/toggles-light.css",
     ];
     public $js = [
-
+        "vendors/popper.js/dist/umd/popper.min.js",
+        "vendors/bootstrap/dist/js/bootstrap.min.js",
+        "vendors/jasny-bootstrap/dist/js/jasny-bootstrap.min.js",
     ];
     public $jsOptions = array(
         'position' => \yii\web\View::POS_END

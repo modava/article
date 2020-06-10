@@ -10,6 +10,7 @@ use Yii;
 use modava\article\models\Article;
 use modava\article\models\search\ArticleSearch;
 use modava\article\components\MyArticleController;
+use yii\db\Exception;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
@@ -197,20 +198,28 @@ class ArticleController extends MyArticleController
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->delete()) {
-            Yii::$app->session->setFlash('toastr-article-index', [
-                'title' => 'Thông báo',
-                'text' => 'Xoá thành công',
-                'type' => 'success'
-            ]);
-        } else {
-            $errors = Html::tag('p', 'Xoá thất bại');
-            foreach ($model->getErrors() as $error) {
-                $errors .= Html::tag('p', $error[0]);
+        try {
+            if ($model->delete()) {
+                Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-index', [
+                    'title' => 'Thông báo',
+                    'text' => 'Xoá thành công',
+                    'type' => 'success'
+                ]);
+            } else {
+                $errors = Html::tag('p', 'Xoá thất bại');
+                foreach ($model->getErrors() as $error) {
+                    $errors .= Html::tag('p', $error[0]);
+                }
+                Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-index', [
+                    'title' => 'Thông báo',
+                    'text' => $errors,
+                    'type' => 'warning'
+                ]);
             }
-            Yii::$app->session->setFlash('toastr-article-index', [
+        } catch (Exception $ex) {
+            Yii::$app->session->setFlash('toastr-' . $model->toastr_key . '-index', [
                 'title' => 'Thông báo',
-                'text' => $errors,
+                'text' => Html::tag('p', 'Xoá thất bại: ' . $ex->getMessage()),
                 'type' => 'warning'
             ]);
         }

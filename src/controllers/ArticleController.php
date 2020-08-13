@@ -170,7 +170,7 @@ class ArticleController extends MyArticleController
                 foreach ($model->getErrors() as $error) {
                     $errors .= Html::tag('p', $error[0]);
                 }
-                Yii::$app->session->setFlash('toastr-product-form', [
+                Yii::$app->session->setFlash('toastr-article-form', [
                     'title' => 'Cập nhật thất bại',
                     'text' => $errors,
                     'type' => 'warning'

@@ -139,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'value' => function ($model) {
                                                 if ($model->language == null)
                                                     return null;
-                                                return Yii::$app->getModule('article')->params['availableLocales'][$model->language];
+                                                return Yii::$app->params['availableLocales'][$model->language];
                                             },
                                             'headerOptions' => [
                                                 'width' => 150,
@@ -176,17 +176,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'buttons' => [
                                                 'update' => function ($url, $model) {
                                                     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
-                                                        'title' => ArticleModule::t('product', 'Update'),
-                                                        'alia-label' => ArticleModule::t('product', 'Update'),
+                                                        'title' => ArticleModule::t('article', 'Update'),
+                                                        'alia-label' => ArticleModule::t('article', 'Update'),
                                                         'data-pjax' => 0,
                                                         'class' => 'btn btn-info btn-xs'
                                                     ]);
                                                 },
                                                 'delete' => function ($url, $model) {
                                                     return Html::a('<span class="glyphicon glyphicon-trash"></span>', 'javascript:;', [
-                                                        'title' => ArticleModule::t('product', 'Delete'),
+                                                        'title' => ArticleModule::t('article', 'Delete'),
                                                         'class' => 'btn btn-danger btn-xs btn-del',
-                                                        'data-title' => ArticleModule::t('product', 'Delete?'),
+                                                        'data-title' => ArticleModule::t('article', 'Delete?'),
                                                         'data-pjax' => 0,
                                                         'data-url' => $url,
                                                         'btn-success-class' => 'success-delete',

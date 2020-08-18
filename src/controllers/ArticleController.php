@@ -152,7 +152,7 @@ class ArticleController extends MyArticleController
                                 foreach (Yii::$app->params['article'] as $key => $value) {
                                     $pathSave = $path . $key;
                                     if (file_exists($pathSave . '/' . $oldImage) && $oldImage != null) {
-                                        unlink($pathSave . '/' . $oldImage);
+                                        @unlink($pathSave . '/' . $oldImage);
                                     }
 
                                 }

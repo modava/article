@@ -28,6 +28,7 @@ class ArticleTypeQuery extends \yii\db\ActiveQuery
 
     public function findByLanguage()
     {
-        return $this->andWhere([ArticleType::tableName() . '.language' => \Yii::$app->language]);
+        return $this->andWhere([ArticleType::tableName() . '.language' => \Yii::$app->language])
+            ->orWhere([ArticleType::tableName() . '.language' => '']);
     }
 }

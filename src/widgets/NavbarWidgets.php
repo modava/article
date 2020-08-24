@@ -11,6 +11,9 @@ class NavbarWidgets extends \yii\base\Widget
 
     public function run()
     {
-        return $this->render('navbarWidgets', []);
+        if(CONSOLE_HOST == 1)
+            return $this->render('navbarWidgets', []);
+        else
+            return '';
     }
 }

@@ -2,15 +2,16 @@
 
 namespace modava\article\controllers;
 
+use backend\components\MyComponent;
 use modava\article\ArticleModule;
-use Yii;
+use modava\article\components\MyArticleController;
 use modava\article\models\ArticleCategory;
 use modava\article\models\search\ArticleCategorySearch;
-use modava\article\components\MyArticleController;
+use Yii;
 use yii\db\Exception;
+use yii\filters\VerbFilter;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ArticleCategoryController implements the CRUD actions for ArticleCategory model.
@@ -40,11 +41,13 @@ class ArticleCategoryController extends MyArticleController
     {
         $searchModel = new ArticleCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//        $dataProvider->pagination->pageSize = 1;
+
+        $totalPage = $this->getTotalPage($dataProvider);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'totalPage' => $totalPage,
         ]);
     }
 
@@ -71,7 +74,7 @@ class ArticleCategoryController extends MyArticleController
         $model = new ArticleCategory();
 
         if ($model->load(Yii::$app->request->post())) {
-            if($model->validate() && $model->save()) {
+            if ($model->validate() && $model->save()) {
                 Yii::$app->session->setFlash('toastr-article-category-view', [
                     'title' => 'Thông báo',
                     'text' => 'Tạo mới thành công',
@@ -109,7 +112,7 @@ class ArticleCategoryController extends MyArticleController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            if($model->validate() && $model->save()) {
+            if ($model->validate() && $model->save()) {
                 Yii::$app->session->setFlash('toastr-article-category-view', [
                     'title' => 'Thông báo',
                     'text' => 'Cập nhật thành công',
@@ -170,6 +173,33 @@ class ArticleCategoryController extends MyArticleController
             ]);
         }
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $perpage
+     */
+    public function actionPerpage($perpage)
+    {
+        MyComponent::setCookies('pageSize', $perpage);
+    }
+
+    /**
+     * @param $dataProvider
+     * @return float|int
+     */
+    public function getTotalPage($dataProvider)
+    {
+        if (MyComponent::hasCookies('pageSize')) {
+            $dataProvider->pagination->pageSize = MyComponent::getCookies('pageSize');
+        } else {
+            $dataProvider->pagination->pageSize = 10;
+        }
+
+        $pageSize = $dataProvider->pagination->pageSize;
+        $totalCount = $dataProvider->totalCount;
+        $totalPage = (($totalCount + $pageSize - 1) / $pageSize);
+
+        return $totalPage;
     }
 
     /**

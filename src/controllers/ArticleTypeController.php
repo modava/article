@@ -2,15 +2,16 @@
 
 namespace modava\article\controllers;
 
+use backend\components\MyComponent;
 use modava\article\ArticleModule;
-use Yii;
+use modava\article\components\MyArticleController;
 use modava\article\models\ArticleType;
 use modava\article\models\search\ArticleTypeSearch;
-use modava\article\components\MyArticleController;
+use Yii;
 use yii\db\Exception;
+use yii\filters\VerbFilter;
 use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ArticleTypeController implements the CRUD actions for ArticleType model.
@@ -41,9 +42,12 @@ class ArticleTypeController extends MyArticleController
         $searchModel = new ArticleTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $totalPage = $this->getTotalPage($dataProvider);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'totalPage'    => $totalPage,
         ]);
     }
 
@@ -69,7 +73,7 @@ class ArticleTypeController extends MyArticleController
     {
         $model = new ArticleType();
         if ($model->load(Yii::$app->request->post())) {
-            if($model->validate() && $model->save()) {
+            if ($model->validate() && $model->save()) {
                 Yii::$app->session->setFlash('toastr-article-type-view', [
                     'title' => 'Thông báo',
                     'text' => 'Tạo mới thành công',
@@ -108,7 +112,7 @@ class ArticleTypeController extends MyArticleController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            if($model->validate() && $model->save()) {
+            if ($model->validate() && $model->save()) {
                 Yii::$app->session->setFlash('toastr-article-type-view', [
                     'title' => 'Thông báo',
                     'text' => 'Cập nhật thành công',
@@ -169,6 +173,33 @@ class ArticleTypeController extends MyArticleController
             ]);
         }
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $perpage
+     */
+    public function actionPerpage($perpage)
+    {
+        MyComponent::setCookies('pageSize', $perpage);
+    }
+
+    /**
+     * @param $dataProvider
+     * @return float|int
+     */
+    public function getTotalPage($dataProvider)
+    {
+        if (MyComponent::hasCookies('pageSize')) {
+            $dataProvider->pagination->pageSize = MyComponent::getCookies('pageSize');
+        } else {
+            $dataProvider->pagination->pageSize = 10;
+        }
+
+        $pageSize = $dataProvider->pagination->pageSize;
+        $totalCount = $dataProvider->totalCount;
+        $totalPage = (($totalCount + $pageSize - 1) / $pageSize);
+
+        return $totalPage;
     }
 
     /**

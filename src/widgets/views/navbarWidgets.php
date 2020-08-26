@@ -1,10 +1,10 @@
 <?php
 
-use yii\helpers\Url;
 use modava\article\ArticleModule;
+use yii\helpers\Url;
 
 ?>
-<ul class="nav nav-tabs nav-sm nav-light mb-25">
+<ul class="nav nav-tabs nav-sm nav-light mb-10">
     <li class="nav-item mb-5">
         <a class="nav-link link-icon-left<?php if (Yii::$app->controller->id == 'article') echo ' active' ?>"
            href="<?= Url::toRoute(['/article']); ?>">

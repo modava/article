@@ -14,6 +14,7 @@ use yii\web\Controller;
  */
 class ArticleModule extends Module implements BootstrapInterface
 {
+    public $upload_dir = '@frontend';
     /**
      * {@inheritdoc}
      */

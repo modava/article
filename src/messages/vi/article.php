@@ -7,7 +7,7 @@ return [
     'Title' => 'Tiêu đề',
     'Slug' => 'Slug',
     'Parent ID' => 'Danh mục cha',
-    'Image' => 'Hình ảnh',
+    'Image' => 'Hình',
     'Description' => 'Mô tả ngắn',
     'Position' => 'Vị trí',
     'Ads Pixel' => 'Pixel facebook',

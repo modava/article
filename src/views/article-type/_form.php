@@ -18,7 +18,9 @@ use modava\article\ArticleModule;
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-4">
-            <?= $form->field($model, 'language')->dropDownList(Yii::$app->params['availableLocales'])->label(ArticleModule::t('article', 'Ngôn ngữ')) ?>
+            <?= $form->field($model, 'language')
+                ->dropDownList(Yii::$app->params['availableLocales'], ['prompt' => ArticleModule::t('article', 'Chọn ngôn ngữ...')])
+                ->label(ArticleModule::t('article', 'Ngôn ngữ')) ?>
         </div>
     </div>
 

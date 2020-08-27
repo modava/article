@@ -25,12 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
         <p>
-            <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
+            <a class="btn btn-outline-light btn-sm" href="<?= \yii\helpers\Url::to(['create']); ?>"
                title="<?= ArticleModule::t('article', 'Create'); ?>">
                 <i class="fa fa-plus"></i> <?= ArticleModule::t('article', 'Create'); ?></a>
-            <?= Html::a(ArticleModule::t('article', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(ArticleModule::t('article', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
             <?= Html::a(ArticleModule::t('article', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
+                'class' => 'btn btn-danger btn-sm',
                 'data' => [
                     'confirm' => ArticleModule::t('article', 'Are you sure you want to delete this item?'),
                     'method' => 'post',

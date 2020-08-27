@@ -30,6 +30,7 @@ class m200507_111020_create_talbe_article extends Migration
             'ads_pixel' => $this->text()->null(),
             'ads_session' => $this->text()->null(),
             'status' => $this->smallInteger(1)->notNull()->defaultValue(1),
+            'language' => $this->string(25)->null(),
             'views' => $this->bigInteger(20)->null(),
             'created_at' => $this->integer(11)->notNull(),
             'updated_at' => $this->integer(11)->notNull(),
@@ -40,7 +41,6 @@ class m200507_111020_create_talbe_article extends Migration
         $this->addForeignKey("fk_article_category", "article", "type_id", "article_type", "id", "RESTRICT", "CASCADE");
         $this->addForeignKey("fk_news_cate_cid", "article", "category_id", "article_category", "id", "RESTRICT", "CASCADE");
         $this->createIndex('index-slug', 'article', 'slug');
-        $this->addColumn('article', 'language', "ENUM('vi', 'en', 'jp') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'vi' COMMENT 'Language for yii2' AFTER `views`");
         $this->createIndex('index-language', 'article', 'language');
         $this->addForeignKey('fk_article_created_by_user', 'article', 'created_by', 'user', 'id', 'RESTRICT', 'CASCADE');
         $this->addForeignKey('fk_article_updated_by_user', 'article', 'updated_by', 'user', 'id', 'RESTRICT', 'CASCADE');

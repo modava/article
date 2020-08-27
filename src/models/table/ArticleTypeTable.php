@@ -33,7 +33,10 @@ class ArticleTypeTable extends \yii\db\ActiveRecord
         $data = $cache->get($key);
 
         if ($data === false) {
-            $data = self::find()->where(['language' => $lang])->published()->sortDescById()->all();
+            $query = self::find();
+            if ($lang != null)
+                $query->where(['language' => $lang]);
+            $data = $query->published()->sortDescById()->all();
             $cache->set($key, $data, Time::SECONDS_IN_A_MONTH);
         }
 

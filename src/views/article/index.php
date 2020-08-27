@@ -105,10 +105,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'value' => function ($model) {
                                                     if ($model->image == null)
                                                         return null;
-                                                    return Html::img(Yii::$app->params['article']['150x150']['folder'] . $model->image, ['width' => 150, 'height' => 150]);
+                                                    return Html::img(Yii::$app->params['article']['150x150']['folder'] . $model->image, ['width' => 50, 'height' => 50]);
                                                 },
                                                 'headerOptions' => [
-                                                    'width' => 110,
+                                                    'width' => 100,
                                                 ],
                                             ],
                                             [

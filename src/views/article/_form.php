@@ -12,7 +12,6 @@ use modava\article\models\table\ActicleCategoryTable;
 /* @var $model modava\article\models\Article */
 /* @var $form yii\widgets\ActiveForm */
 
-if ($model->language == null) $model->language = Yii::$app->getModule('article')->params['defaultLocales'];
 ?>
 <?php \backend\widgets\ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
     <div class="article-form">
@@ -30,14 +29,14 @@ if ($model->language == null) $model->language = Yii::$app->getModule('article')
             <div class="col-4">
                 <?= $form->field($model, 'category_id')
                     ->dropDownList(ArrayHelper::map(ActicleCategoryTable::getAllArticleCategory($model->language), 'id', 'title'), [
-                        'prompt' => ArticleModule::t('article', 'Parent ID')
+                        'prompt' => ArticleModule::t('article', 'Chọn danh mục...')
                     ])
                     ->label(ArticleModule::t('article', 'Danh mục')) ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'type_id')
                     ->dropDownList(\yii\helpers\ArrayHelper::map(ArticleTypeTable::getAllArticleType($model->language), 'id', 'title'), [
-                        'prompt' => ArticleModule::t('article', 'Article type')
+                        'prompt' => ArticleModule::t('article', 'Chọn loại...')
                     ])
                     ->label(ArticleModule::t('article', 'Thể loại')) ?>
             </div>

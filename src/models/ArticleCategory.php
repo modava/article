@@ -81,10 +81,9 @@ class ArticleCategory extends ActicleCategoryTable
     public function rules()
     {
         return [
-            [['title', 'language'], 'required'],
+            [['title'], 'required'],
             [['parent_id', 'position', 'status',], 'integer'],
             [['ads_pixel', 'ads_session', 'language'], 'string'],
-            ['language', 'in', 'range' => ['vi', 'en', 'jp'], 'strict' => false],
             [['title', 'slug', 'image', 'description'], 'string', 'max' => 255],
         ];
     }

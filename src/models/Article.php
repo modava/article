@@ -76,12 +76,11 @@ class Article extends ArticleTable
     public function rules()
     {
         return [
-            [['title', 'language', 'content'], 'required'],
+            [['title', 'content'], 'required'],
             [['category_id'], 'required', 'message' => ArticleModule::t('article', 'Danh mục không được để trống')],
             [['type_id'], 'required', 'message' => ArticleModule::t('article', 'Thể loại không được để trống')],
             [['category_id', 'type_id', 'position', 'status', 'views', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['content', 'ads_pixel', 'ads_session', 'description', 'language'], 'string'],
-            ['language', 'in', 'range' => ['vi', 'en', 'jp'], 'strict' => false],
             [['title', 'slug', 'image'], 'string', 'max' => 255],
             ['image', 'file', 'extensions' => ['png', 'jpg', 'gif'],
                 'maxSize' => 1024 * 1024],

@@ -19,8 +19,8 @@ use modava\article\ArticleModule;
         </div>
         <div class="col-4">
             <?= $form->field($model, 'language')
-                ->dropDownList(Yii::$app->params['availableLocales'], ['prompt' => ArticleModule::t('article', 'Chọn ngôn ngữ...')])
-                ->label(ArticleModule::t('article', 'Ngôn ngữ')) ?>
+                ->dropDownList(Yii::$app->params['availableLocales'], ['prompt' => Yii::t('backend', 'Chọn ngôn ngữ...')])
+                ->label(Yii::t('backend', 'Ngôn ngữ')) ?>
         </div>
     </div>
 
@@ -35,7 +35,7 @@ use modava\article\ArticleModule;
     <?= $form->field($model, 'status')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton(ArticleModule::t('article', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('backend', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

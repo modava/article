@@ -265,7 +265,7 @@ class ArticleController extends MyArticleController
             return $model;
         }
 
-        throw new NotFoundHttpException(ArticleModule::t('article', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Yii::t('backend', 'The requested page does not exist.'));
     }
 
 

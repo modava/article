@@ -83,20 +83,20 @@ class ArticleType extends ArticleTypeTable
     public function attributeLabels()
     {
         return [
-            'id' => ArticleModule::t('article', 'ID'),
-            'title' => ArticleModule::t('article', 'Title'),
-            'slug' => ArticleModule::t('article', 'Slug'),
-            'image' => ArticleModule::t('article', 'Image'),
-            'description' => ArticleModule::t('article', 'Description'),
-            'position' => ArticleModule::t('article', 'Position'),
-            'ads_pixel' => ArticleModule::t('article', 'Ads Pixel'),
-            'ads_session' => ArticleModule::t('article', 'Ads Session'),
-            'status' => ArticleModule::t('article', 'Status'),
-            'language' => ArticleModule::t('article', 'Language'),
-            'created_at' => ArticleModule::t('article', 'Created At'),
-            'updated_at' => ArticleModule::t('article', 'Updated At'),
-            'created_by' => ArticleModule::t('article', 'Created By'),
-            'updated_by' => ArticleModule::t('article', 'Updated By'),
+            'id' => Yii::t('backend', 'ID'),
+            'title' => Yii::t('backend', 'Title'),
+            'slug' => Yii::t('backend', 'Slug'),
+            'image' => Yii::t('backend', 'Image'),
+            'description' => Yii::t('backend', 'Description'),
+            'position' => Yii::t('backend', 'Position'),
+            'ads_pixel' => Yii::t('backend', 'Ads Pixel'),
+            'ads_session' => Yii::t('backend', 'Ads Session'),
+            'status' => Yii::t('backend', 'Status'),
+            'language' => Yii::t('backend', 'Language'),
+            'created_at' => Yii::t('backend', 'Created At'),
+            'updated_at' => Yii::t('backend', 'Updated At'),
+            'created_by' => Yii::t('backend', 'Created By'),
+            'updated_by' => Yii::t('backend', 'Updated By'),
         ];
     }
 

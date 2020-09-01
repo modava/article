@@ -77,8 +77,8 @@ class Article extends ArticleTable
     {
         return [
             [['title', 'content'], 'required'],
-            [['category_id'], 'required', 'message' => ArticleModule::t('article', 'Danh mục không được để trống')],
-            [['type_id'], 'required', 'message' => ArticleModule::t('article', 'Thể loại không được để trống')],
+            [['category_id'], 'required', 'message' => Yii::t('backend', 'Danh mục không được để trống')],
+            [['type_id'], 'required', 'message' => Yii::t('backend', 'Thể loại không được để trống')],
             [['category_id', 'type_id', 'position', 'status', 'views', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['content', 'ads_pixel', 'ads_session', 'description', 'language'], 'string'],
             [['title', 'slug', 'image'], 'string', 'max' => 255],
@@ -95,24 +95,24 @@ class Article extends ArticleTable
     public function attributeLabels()
     {
         return [
-            'id' => ArticleModule::t('article', 'ID'),
-            'category_id' => ArticleModule::t('article', 'Category ID'),
-            'type_id' => ArticleModule::t('article', 'Type ID'),
-            'title' => ArticleModule::t('article', 'Title'),
-            'slug' => ArticleModule::t('article', 'Slug'),
-            'image' => ArticleModule::t('article', 'Image'),
-            'description' => ArticleModule::t('article', 'Description'),
-            'content' => ArticleModule::t('article', 'Content'),
-            'position' => ArticleModule::t('article', 'Position'),
-            'ads_pixel' => ArticleModule::t('article', 'Ads Pixel'),
-            'ads_session' => ArticleModule::t('article', 'Ads Session'),
-            'status' => ArticleModule::t('article', 'Status'),
-            'views' => ArticleModule::t('article', 'Views'),
-            'language' => ArticleModule::t('article', 'Language'),
-            'created_at' => ArticleModule::t('article', 'Created At'),
-            'updated_at' => ArticleModule::t('article', 'Updated At'),
-            'created_by' => ArticleModule::t('article', 'Created By'),
-            'updated_by' => ArticleModule::t('article', 'Updated By'),
+            'id' => Yii::t('backend', 'ID'),
+            'category_id' => Yii::t('backend', 'Category ID'),
+            'type_id' => Yii::t('backend', 'Type ID'),
+            'title' => Yii::t('backend', 'Title'),
+            'slug' => Yii::t('backend', 'Slug'),
+            'image' => Yii::t('backend', 'Image'),
+            'description' => Yii::t('backend', 'Description'),
+            'content' => Yii::t('backend', 'Content'),
+            'position' => Yii::t('backend', 'Position'),
+            'ads_pixel' => Yii::t('backend', 'Ads Pixel'),
+            'ads_session' => Yii::t('backend', 'Ads Session'),
+            'status' => Yii::t('backend', 'Status'),
+            'views' => Yii::t('backend', 'Views'),
+            'language' => Yii::t('backend', 'Language'),
+            'created_at' => Yii::t('backend', 'Created At'),
+            'updated_at' => Yii::t('backend', 'Updated At'),
+            'created_by' => Yii::t('backend', 'Created By'),
+            'updated_by' => Yii::t('backend', 'Updated By'),
         ];
     }
 

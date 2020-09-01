@@ -54,8 +54,8 @@ use modava\article\ArticleModule;
     <?php // echo $form->field($model, 'updated_by') ?>
 
     <div class="form-group">
-        <?= Html::submitButton(ArticleModule::t('article', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(ArticleModule::t('article', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton(Yii::t('backend', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('backend', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

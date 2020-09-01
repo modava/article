@@ -7,9 +7,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model modava\article\models\ArticleCategory */
 
-$this->title = ArticleModule::t('article', 'Create');
-$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article'), 'url' => ['/article']];
-$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article category'), 'url' => ['index']];
+$this->title = Yii::t('backend', 'Create');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Article'), 'url' => ['/article']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Article category'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid px-xxl-25 px-xl-10">

@@ -13,7 +13,7 @@ return [
     'articleName' => 'Article',
     'articleVersion' => '1.0',
     'status' => [
-        '0' => ArticleModule::t('article', 'Tạm ngưng'),
-        '1' => ArticleModule::t('article', 'Hiển thị'),
+        '0' => Yii::t('backend', 'Tạm ngưng'),
+        '1' => Yii::t('backend', 'Hiển thị'),
     ],
 ];

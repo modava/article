@@ -9,8 +9,8 @@ use yii\widgets\DetailView;
 /* @var $model modava\article\models\ArticleType */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article'), 'url' => ['/article']];
-$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article type'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Article'), 'url' => ['/article']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Article type'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -25,13 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </h4>
         <p>
             <a class="btn btn-outline-light btn-sm" href="<?= \yii\helpers\Url::to(['create']); ?>"
-               title="<?= ArticleModule::t('article', 'Create'); ?>">
-                <i class="fa fa-plus"></i> <?= ArticleModule::t('article', 'Create'); ?></a>
-            <?= Html::a(ArticleModule::t('article', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
-            <?= Html::a(ArticleModule::t('article', 'Delete'), ['delete', 'id' => $model->id], [
+               title="<?= Yii::t('backend', 'Create'); ?>">
+                <i class="fa fa-plus"></i> <?= Yii::t('backend', 'Create'); ?></a>
+            <?= Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-sm']) ?>
+            <?= Html::a(Yii::t('backend', 'Delete'), ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger btn-sm',
                 'data' => [
-                    'confirm' => ArticleModule::t('article', 'Are you sure you want to delete this item?'),
+                    'confirm' => Yii::t('backend', 'Are you sure you want to delete this item?'),
                     'method' => 'post',
                 ],
             ]) ?>
@@ -73,11 +73,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'updated_at:datetime',
                         [
                             'attribute' => 'userCreated.userProfile.fullname',
-                            'label' => ArticleModule::t('article', 'Created By')
+                            'label' => Yii::t('backend', 'Created By')
                         ],
                         [
                             'attribute' => 'userUpdated.userProfile.fullname',
-                            'label' => ArticleModule::t('article', 'Updated By')
+                            'label' => Yii::t('backend', 'Updated By')
                         ],
                     ],
                 ]) ?>

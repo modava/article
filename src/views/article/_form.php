@@ -23,22 +23,22 @@ use modava\article\models\table\ActicleCategoryTable;
         <div class="row">
             <div class="col-4">
                 <?= $form->field($model, 'language')
-                    ->dropDownList(Yii::$app->params['availableLocales'], ['prompt' => ArticleModule::t('article', 'Chọn ngôn ngữ...')])
-                    ->label(ArticleModule::t('article', 'Ngôn ngữ')) ?>
+                    ->dropDownList(Yii::$app->params['availableLocales'], ['prompt' => Yii::t('backend', 'Chọn ngôn ngữ...')])
+                    ->label(Yii::t('backend', 'Ngôn ngữ')) ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'category_id')
                     ->dropDownList(ArrayHelper::map(ActicleCategoryTable::getAllArticleCategory($model->language), 'id', 'title'), [
-                        'prompt' => ArticleModule::t('article', 'Chọn danh mục...')
+                        'prompt' => Yii::t('backend', 'Chọn danh mục...')
                     ])
-                    ->label(ArticleModule::t('article', 'Danh mục')) ?>
+                    ->label(Yii::t('backend', 'Danh mục')) ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'type_id')
                     ->dropDownList(\yii\helpers\ArrayHelper::map(ArticleTypeTable::getAllArticleType($model->language), 'id', 'title'), [
-                        'prompt' => ArticleModule::t('article', 'Chọn loại...')
+                        'prompt' => Yii::t('backend', 'Chọn loại...')
                     ])
-                    ->label(ArticleModule::t('article', 'Thể loại')) ?>
+                    ->label(Yii::t('backend', 'Thể loại')) ?>
             </div>
         </div>
 
@@ -60,7 +60,7 @@ use modava\article\models\table\ActicleCategoryTable;
             'model' => $model,
             'attribute' => 'image',
             'path' => $path,
-            'label' => ArticleModule::t('article', 'Hình ảnh') . ': ' . Yii::$app->params['article-size'],
+            'label' => Yii::t('backend', 'Hình ảnh') . ': ' . Yii::$app->params['article-size'],
         ]); ?>
 
         <?php if (Yii::$app->controller->action->id == 'create')
@@ -70,7 +70,7 @@ use modava\article\models\table\ActicleCategoryTable;
         <?= $form->field($model, 'status')->checkbox() ?>
 
         <div class="form-group">
-            <?= Html::submitButton(ArticleModule::t('article', 'Save'), ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton(Yii::t('backend', 'Save'), ['class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

@@ -7,13 +7,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model modava\article\models\ArticleCategory */
 
-$this->title = ArticleModule::t('article', 'Update : {name}', [
+$this->title = Yii::t('backend', 'Update : {name}', [
     'name' => $model->title,
 ]);
-$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article'), 'url' => ['/article']];
-$this->params['breadcrumbs'][] = ['label' => ArticleModule::t('article', 'Article category'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Article'), 'url' => ['/article']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Article category'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = ArticleModule::t('article', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
 ?>
 <div class="container-fluid px-xxl-25 px-xl-10">
     <?= NavbarWidgets::widget(); ?>
@@ -24,8 +24,8 @@ $this->params['breadcrumbs'][] = ArticleModule::t('article', 'Update');
                         class="ion ion-md-apps"></span></span><?= Html::encode($this->title) ?>
         </h4>
         <a class="btn btn-outline-light" href="<?= \yii\helpers\Url::to(['create']); ?>"
-           title="<?= ArticleModule::t('article', 'Create'); ?>">
-            <i class="fa fa-plus"></i> <?= ArticleModule::t('article', 'Create'); ?></a>
+           title="<?= Yii::t('backend', 'Create'); ?>">
+            <i class="fa fa-plus"></i> <?= Yii::t('backend', 'Create'); ?></a>
     </div>
     <!-- /Title -->
 

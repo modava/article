@@ -24,9 +24,7 @@ use modava\article\ArticleModule;
         </div>
     </div>
 
-    <?= $form->field($model, 'description')->widget(\modava\tiny\TinyMce::class, [
-        'options' => ['rows' => 10],
-    ]) ?>
+    <?= $form->field($model, 'description')->textarea(['rows'=> '6']) ?>
 
     <?php if (Yii::$app->controller->action->id == 'create')
         $model->status = 1;

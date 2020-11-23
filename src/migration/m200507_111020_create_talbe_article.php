@@ -25,7 +25,7 @@ class m200507_111020_create_talbe_article extends Migration
             'slug' => $this->string(255)->notNull(),
             'image' => $this->string(255)->null(),
             'description' => $this->text()->null(),
-            'content' => $this->text()->null(),
+            'content' => $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext'),
             'position' => $this->integer(11)->null(),
             'ads_pixel' => $this->text()->null(),
             'ads_session' => $this->text()->null(),

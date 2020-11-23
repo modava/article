@@ -108,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     return Html::img(Yii::$app->params['article']['150x150']['folder'] . $model->image, ['width' => 50, 'height' => 50]);
                                                 },
                                                 'headerOptions' => [
-                                                    'width' => 80,
+                                                    'width' => 60,
                                                 ],
                                             ],
                                             [
@@ -119,12 +119,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         'title' => $model->title,
                                                         'data-pjax' => 0,
                                                     ]);
-                                                }
+                                                },
+
                                             ],
                                             [
                                                 'attribute' => 'category_id',
                                                 'value' => 'category.title',
                                                 'label' => 'Danh mục',
+                                                'headerOptions' => [
+                                                    'width' => 100,
+                                                ],
                                             ],
                                             [
                                                 'attribute' => 'status',
@@ -132,13 +136,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     return Yii::$app->getModule('article')->params['status'][$model->status];
                                                 },
                                                 'headerOptions' => [
-                                                    'width' => 130,
+                                                    'width' => 100,
                                                 ],
                                             ],
                                             [
                                                 'attribute' => 'type_id',
                                                 'value' => 'type.title',
                                                 'label' => 'Thể loại',
+                                                'headerOptions' => [
+                                                    'width' => 120,
+                                                ],
                                             ],
                                             [
                                                 'attribute' => 'language',
@@ -148,7 +155,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     return Yii::$app->params['availableLocales'][$model->language];
                                                 },
                                                 'headerOptions' => [
-                                                    'width' => 150,
+                                                    'width' => 100,
                                                 ],
                                             ],
                                             //'description',
@@ -164,14 +171,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'attribute' => 'created_by',
                                                 'value' => 'userCreated.userProfile.fullname',
                                                 'headerOptions' => [
-                                                    'width' => 150,
+                                                    'width' => 100,
                                                 ],
                                             ],
                                             [
                                                 'attribute' => 'created_at',
                                                 'format' => 'date',
                                                 'headerOptions' => [
-                                                    'width' => 150,
+                                                    'width' => 100,
                                                 ],
                                             ],
                                             //'updated_by',
@@ -202,7 +209,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     }
                                                 ],
                                                 'headerOptions' => [
-                                                    'width' => 130,
+                                                    'width' => 100,
                                                 ],
                                             ],
                                         ],

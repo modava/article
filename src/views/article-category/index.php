@@ -1,7 +1,7 @@
 <?php
 
 use common\grid\MyGridView;
-use modava\article\ArticleModule;
+use modava\article\models\ArticleCategory;
 use modava\article\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
@@ -108,6 +108,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                                         'title' => $model->title,
                                                         'data-pjax' => 0,
                                                     ]);
+                                                }
+                                            ],
+                                            [
+                                                'attribute' => 'parent_id',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return ArticleCategory::findParentName($model->parent_id);
                                                 }
                                             ],
                                             'description:html',

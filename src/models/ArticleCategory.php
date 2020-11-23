@@ -63,6 +63,15 @@ class ArticleCategory extends ActicleCategoryTable
             ]);
     }
 
+    public static function findParentName($id)
+    {
+        if ($id == null)
+            return null;
+
+        $parent = self::find()->where(['id' => $id])->one();
+        return $parent->title;
+    }
+
 
     public function afterSave($insert, $changedAttributes)
     {

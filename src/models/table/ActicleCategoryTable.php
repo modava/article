@@ -43,6 +43,48 @@ class ActicleCategoryTable extends ActiveRecord
         return $data;
     }
 
+    public static function getAllArticleCategoryArray($lang = null)
+    {
+        $cache = Yii::$app->cache;
+        $key = 'redis-get-all-article-category-' . $lang;
+
+        $data = $cache->get($key);
+
+        if ($data === false) {
+            $query = self::find();
+            if ($lang != null)
+                $query->where(['language' => $lang]);
+            $data = $query->published()->sortDescById()->all();
+            $cache->set($key, $data, Time::SECONDS_IN_A_MONTH);
+        }
+
+        return $data;
+    }
+
+    public function getCategories($categories, $parent_id, $char, &$result)
+    {
+        if (count($categories) > 0) {
+            foreach ($categories as $key => $item) {
+                if ($item->parent_id == $parent_id) {
+                    $result[$item->id] = $char . $item->title;
+                    unset($categories[$key]);
+                    $this->getCategories($categories, $item->id, $char . '---', $result);
+                }
+            }
+        }
+    }
+
+    public static function getCategoryByParentId($parentId = null, $lang = null)
+    {
+        $query = self::find();
+        if ($lang != null)
+            $query->where(['language' => $lang]);
+        $data = $query->where(['parent_id' => $parentId])->published()->sortDescById()->all();
+        if ($data == null)
+            return null;
+        return $data;
+    }
+
     public function afterDelete()
     {
         $cache = Yii::$app->cache;

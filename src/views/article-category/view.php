@@ -1,6 +1,6 @@
 <?php
 
-use modava\article\ArticleModule;
+use modava\article\models\ArticleCategory;
 use modava\article\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -50,7 +50,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'id',
                         'title',
                         'slug',
-                        'parent_id',
+                        [
+                            'attribute' => 'parent_id',
+                            'value' => function ($model) {
+                                return ArticleCategory::findParentName($model->parent_id);
+                            }
+                        ],
                         'image',
                         'description:html',
                         'position',

@@ -187,6 +187,28 @@ class ArticleController extends MyArticleController
         ]);
     }
 
+    public function actionShowHot()
+    {
+        if (Yii::$app->request->isAjax) {
+            $id = Yii::$app->request->post('id');
+
+            $model = $this->findModel($id);
+            try {
+                if ($model->hot == 1) {
+                    $model->hot = 0;
+                } else {
+                    $model->hot = 1;
+                }
+                if ($model->save()) {
+                    echo 1;
+                }
+            } catch (\yii\db\Exception $exception) {
+                echo 0;
+            }
+        }
+    }
+
+
     /**
      * Deletes an existing Article model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

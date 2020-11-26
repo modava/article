@@ -30,6 +30,7 @@ class m200507_111020_create_talbe_article extends Migration
             'ads_pixel' => $this->text()->null(),
             'ads_session' => $this->text()->null(),
             'status' => $this->smallInteger(1)->notNull()->defaultValue(1),
+            'hot' => $this->smallInteger(1)->notNull()->defaultValue(0),
             'language' => $this->string(25)->null(),
             'views' => $this->bigInteger(20)->null(),
             'created_at' => $this->integer(11)->notNull(),

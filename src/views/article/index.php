@@ -140,6 +140,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 ],
                                             ],
                                             [
+                                                'attribute' => 'hot',
+                                                'format' => 'raw',
+                                                'value' => function ($model) {
+                                                    return \modava\input\Checkbox::widget([
+                                                        'id' => $model->id,
+                                                        'value' => $model->hot,
+                                                    ]);
+                                                },
+                                                'headerOptions' => [
+                                                    'width' => 70,
+                                                ],
+                                            ],
+                                            [
                                                 'attribute' => 'type_id',
                                                 'value' => 'type.title',
                                                 'label' => 'Thể loại',
@@ -228,6 +241,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 <?php
 $urlChangePageSize = \yii\helpers\Url::toRoute(['perpage']);
+$urlCheckHot = \yii\helpers\Url::toRoute(['show-hot']);
 $script = <<< JS
 var customPjax = new myGridView();
 customPjax.init({
@@ -241,6 +255,29 @@ $('body').on('click', '.success-delete', function(e){
         $.post(url);
     }
     return false;
+});
+$(document).ready(function () {
+    $('.check-toggle').change(function () {
+        var id = $(this).val();
+        $.post('$urlCheckHot', {id: id}, function (result) {
+            if(result == 1) {
+                $.toast({
+                    heading: 'Thông báo',
+                    text: 'Cập nhật thành công',
+                    position: 'top-right',
+                    class: 'jq-toast-success',
+                });
+            }
+            if(result == 0) {
+                $.toast({
+                    heading: 'Thông báo',
+                    text: 'Cập nhật thất bại',
+                    position: 'top-right',
+                    class: 'jq-toast-danger',
+                });
+            }
+        });
+    });
 });
 JS;
 $this->registerJs($script, \yii\web\View::POS_END);

@@ -23,6 +23,7 @@ use Yii;
  * @property string|null $ads_pixel
  * @property string|null $ads_session
  * @property int $status
+ * @property int $hot
  * @property int|null $views
  * @property int $created_at
  * @property int $updated_at

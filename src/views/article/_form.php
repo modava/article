@@ -111,7 +111,7 @@ function loadDataByLang(url, lang){
         });
     });
 }
-$('body').on('change paste keyup', '.article-title', function(){
+$('body').on('change paste', '.article-title', function(){
     var title = $(this).val() || null;
     if(title !== null){
         $.ajax({

@@ -26,7 +26,7 @@ $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, ''
                 ->label(Yii::t('backend', 'Ngôn ngữ')) ?>
         </div>
         <div class="col-4">
-            <?= $form->field($model, 'parent_id')->dropDownList($result, ['prompt' => 'Danh mục cha...'])
+            <?= $form->field($model, 'parent_id')->dropDownList($result ?: [], ['prompt' => 'Danh mục cha...'])
                 ->label() ?>
         </div>
     </div>

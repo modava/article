@@ -46,10 +46,13 @@ class Article extends ArticleTable
             [
                 'slug' => [
                     'class' => SluggableBehavior::class,
-                    'immutable' => false,
+                    'immutable' => true,
                     'ensureUnique' => true,
                     'value' => function () {
-                        return MyHelper::createAlias($this->title);
+                        if ($this->slug == null) {
+                            return MyHelper::createAlias($this->title);
+                        }
+                        return $this->slug;
                     }
                 ],
                 [
@@ -73,7 +76,8 @@ class Article extends ArticleTable
     public function rules()
     {
         return [
-            [['title', 'content'], 'required'],
+            [['title', 'slug', 'content'], 'required'],
+            [['slug'], 'unique', 'targetClass' => self::class, 'targetAttribute' => 'slug'],
             [['category_id'], 'required', 'message' => Yii::t('backend', 'Danh mục không được để trống')],
             [['type_id'], 'required', 'message' => Yii::t('backend', 'Thể loại không được để trống')],
             [['category_id', 'type_id', 'position', 'status', 'hot', 'views', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],

@@ -19,7 +19,22 @@ $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, ''
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'class' => 'form-control article-title']) ?>
+            </div>
+            <div class="col-md-6 col-12">
+                <?= $form->field($model, 'slug', [
+                    'options' => [
+                        'class' => 'form-group slug-content',
+                        'style' => 'display: ' . ($model->title != null || $model->slug != null ? 'block' : 'none')
+                    ]
+                ])->textInput([
+                    'maxlength' => true,
+                    'class' => 'form-control slug'
+                ]) ?>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-4">
@@ -29,21 +44,21 @@ $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, ''
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'category_id')
-                    ->dropDownList($result, [
+                    ->dropDownList($result ?: [], [
                         'prompt' => Yii::t('backend', 'Chọn danh mục...')
                     ])
                     ->label(Yii::t('backend', 'Danh mục')) ?>
             </div>
             <div class="col-4">
                 <?= $form->field($model, 'type_id')
-                    ->dropDownList(\yii\helpers\ArrayHelper::map(ArticleTypeTable::getAllArticleType($model->language), 'id', 'title'), [
+                    ->dropDownList(\yii\helpers\ArrayHelper::map(ArticleTypeTable::getAllArticleType($model->language) ?: [], 'id', 'title'), [
                         'prompt' => Yii::t('backend', 'Chọn loại...')
                     ])
                     ->label(Yii::t('backend', 'Thể loại')) ?>
             </div>
         </div>
 
-        <?= $form->field($model, 'description')->textarea(['rows'=> '6']); ?>
+        <?= $form->field($model, 'description')->textarea(['rows' => '6']); ?>
 
         <?= $form->field($model, 'content')->widget(\modava\tiny\TinyMce::class, [
             'options' => ['rows' => 15],
@@ -78,6 +93,7 @@ $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, ''
 <?php
 $urlLoadCategories = Url::toRoute(['load-categories-by-lang']);
 $urlLoadTypes = Url::toRoute(['load-types-by-lang']);
+$urlGetSlug = Url::toRoute(['generate-slug', 'id' => $model->primaryKey]);
 $script = <<< JS
 function loadDataByLang(url, lang){
     return new Promise((resolve) => {
@@ -95,7 +111,30 @@ function loadDataByLang(url, lang){
         });
     });
 }
-$('body').on('change', '#article-language', async function(){
+$('body').on('change paste keyup', '.article-title', function(){
+    var title = $(this).val() || null;
+    if(title !== null){
+        $.ajax({
+            type: 'POST',
+            url: '$urlGetSlug',
+            dataType: 'json',
+            data: {
+                title: title
+            }
+        }).done(res => {
+            if(res.code === 200){
+                $('.slug').val(res.slug);
+            } else {
+                console.log(res.msg);
+            }
+        }).fail(f => {
+            console.log('Get slug failed', f);
+        });
+        $('.slug-content').slideDown();
+    } else {
+        $('.slug-content').slideUp();
+    }
+}).on('change', '#article-language', async function(){
     var v = $(this).val(),
         categories, types;
     $('#article-category_id, #article-type_id').find('option[value!=""]').remove();

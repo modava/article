@@ -14,11 +14,13 @@ class ArticleSearch extends Article
     /**
      * {@inheritdoc}
      */
+    public $btn_search = 2;
+
     public function rules()
     {
         return [
             [['id', 'category_id', 'type_id', 'position', 'status', 'hot', 'views', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['title', 'slug', 'image', 'description', 'content', 'ads_pixel', 'ads_session', 'language'], 'safe'],
+            [['title', 'slug', 'image', 'description', 'content', 'ads_pixel', 'ads_session', 'language', 'btn_search'], 'safe'],
         ];
     }
 

@@ -49,4 +49,34 @@ $(function () {
     $('body').on('load-body', function () {
         setPopovers();
     }).trigger('load-body');
+    $('body').on('click', '.form-search .btn-action-search', function (e) {
+        e.preventDefault();
+        var btn = $(this),
+            values = btn.attr('data-value') || null,
+            data_btn = btn.attr('data-btn') || null,
+            form = btn.closest('.form-search');
+        try {
+            values = JSON.parse(values);
+        } catch (ex) {
+        }
+        if (values !== null && typeof values === "object" && Object.keys(values).length > 0) {
+            Object.keys(values).forEach(function (k) {
+                form.find('*[name="' + k + '"]').val(values[k]);
+            });
+        }
+        form.find('.btn_search').val(data_btn);
+        form.trigger('submit');
+        return false;
+    }).on('click', '.clear-value', function (e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+
+        let input = $(this).closest('.input-group').find('input, select');
+
+        if (input.hasClass('data-krajee-daterangepicker')) {
+            input.trigger('cancel.daterangepicker');
+        } else {
+            input.val('').trigger('change');
+        }
+    });
 });

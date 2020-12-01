@@ -16,4 +16,8 @@ return [
         '0' => Yii::t('backend', 'Tạm ngưng'),
         '1' => Yii::t('backend', 'Hiển thị'),
     ],
+    'class_button_search' => [
+        'active' => 'btn-primary',
+        'inactive' => 'btn-light'
+    ]
 ];

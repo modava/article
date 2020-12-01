@@ -27,6 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <i class="fa fa-plus"></i> <?= Yii::t('backend', 'Create'); ?>
             </a>
         </div>
+        <div class="search">
+            <?= $this->render('_search', [
+                'model' => $searchModel
+            ]) ?>
+        </div>
 
         <!-- Row -->
         <div class="row">
@@ -62,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ],
                                         'myOptions' => [
                                             'class' => 'dt-grid-content my-content pane-vScroll',
-                                            'data-minus' => '{"0":95,"1":".hk-navbar","2":".nav-tabs","3":".hk-pg-header","4":".hk-footer-wrap"}'
+                                            'data-minus' => '{"0":95,"1":".hk-navbar","2":".nav-tabs","3":".hk-pg-header","4":".hk-footer-wrap","5":".search"}'
                                         ],
                                         'summaryOptions' => [
                                             'class' => 'summary pull-right',

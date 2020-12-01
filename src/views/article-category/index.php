@@ -96,10 +96,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'class' => 'yii\grid\SerialColumn',
                                                 'header' => 'STT',
                                                 'headerOptions' => [
-                                                    'width' => 70,
+                                                    'width' => 50,
                                                 ],
                                             ],
-
+                                            [
+                                                'attribute' => 'id',
+                                                'headerOptions' => [
+                                                    'width' => 50,
+                                                ],
+                                            ],
                                             [
                                                 'attribute' => 'title',
                                                 'format' => 'raw',

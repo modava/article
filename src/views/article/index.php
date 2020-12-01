@@ -203,8 +203,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                             [
                                                 'class' => 'yii\grid\ActionColumn',
                                                 'header' => Yii::t('backend', 'Actions'),
-                                                'template' => '{update} {delete}',
+                                                'template' => '{link} {update} {delete}',
                                                 'buttons' => [
+                                                    'link' => function ($url, $model) {
+                                                        $link = Yii::$app->urlManagerFrontend->createUrl([$model->category->slug . '/' . $model->slug]);
+                                                        return Html::a('<span class="glyphicon glyphicon-link"></span>', $link, [
+                                                            'title' => Yii::t('backend', 'Coppy'),
+                                                            'alia-label' => Yii::t('backend', 'Coppy'),
+                                                            'data-pjax' => 0,
+                                                            'class' => 'btn btn-info btn-xs',
+                                                            'target' => '_blank'
+                                                        ]);
+                                                    },
                                                     'update' => function ($url, $model) {
                                                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                                                             'title' => Yii::t('backend', 'Update'),

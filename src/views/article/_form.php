@@ -64,6 +64,15 @@ $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, ''
             'options' => ['rows' => 15],
             'type' => 'content',
         ]) ?>
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <?= $form->field($model, 'priority')->input('number', [
+                    'max' => 1,
+                    'min' => 0,
+                    'step' => 0.1
+                ]) ?>
+            </div>
+        </div>
 
         <?php
         if (empty($model->getErrors()))

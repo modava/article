@@ -24,6 +24,8 @@ use yii\db\ActiveRecord;
  * @property string|null $ads_pixel
  * @property string|null $ads_session
  * @property int $status
+ * @property int $hot
+ * @property float $priority
  * @property int|null $views
  * @property string $language Language for yii2
  * @property int $created_at
@@ -87,6 +89,8 @@ class Article extends ArticleTable
                 'maxSize' => 1024 * 1024],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleType::class, 'targetAttribute' => ['type_id' => 'id']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleCategory::class, 'targetAttribute' => ['category_id' => 'id']],
+            ['priority', 'compare', 'operator' => '<=', 'compareValue' => 1, 'message' => Yii::t('backend', 'Giá trị tối đa là 1')],
+            ['priority', 'compare', 'operator' => '>=', 'compareValue' => 0, 'message' => Yii::t('backend', 'Giá trị tối thiểu là 0')],
         ];
     }
 
@@ -109,6 +113,7 @@ class Article extends ArticleTable
             'ads_session' => Yii::t('backend', 'Ads Session'),
             'status' => Yii::t('backend', 'Status'),
             'hot' => Yii::t('backend', 'Hot'),
+            'priority' => Yii::t('backend', 'Priority'),
             'views' => Yii::t('backend', 'Views'),
             'language' => Yii::t('backend', 'Language'),
             'created_at' => Yii::t('backend', 'Created At'),

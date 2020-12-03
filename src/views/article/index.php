@@ -205,7 +205,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'template' => '{link} {update} {delete}',
                                                 'buttons' => [
                                                     'link' => function ($url, $model) {
-                                                        if (!class_exists('frontend\controllers\LinkRedirectController') || !method_exists('frontend\controllers\LinkController', 'actionGetLinkArticle')) return null;
+                                                        if (!class_exists('frontend\controllers\LinkRedirectController') || !method_exists('frontend\controllers\LinkRedirectController', 'actionGetLinkArticle')) return null;
                                                         $link = Yii::$app->urlManagerFrontend->createUrl(['/link-redirect/get-link-article', 'slug' => $model->slug]);
                                                         return Html::a('<span class="glyphicon glyphicon-link"></span>', $link, [
                                                             'title' => Yii::t('backend', 'Link'),

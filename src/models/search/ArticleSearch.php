@@ -2,6 +2,7 @@
 
 namespace modava\article\models\search;
 
+use modava\article\models\table\ActicleCategoryTable;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use modava\article\models\Article;
@@ -56,7 +57,6 @@ class ArticleSearch extends Article
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'category_id' => $this->category_id,
             'type_id' => $this->type_id,
             'position' => $this->position,
             'status' => $this->status,
@@ -75,6 +75,15 @@ class ArticleSearch extends Article
             ->andFilterWhere(['like', 'ads_pixel', $this->ads_pixel])
             ->andFilterWhere(['like', 'ads_session', $this->ads_session])
             ->andFilterWhere(['like', 'language', $this->language]);
+
+        if ($this->category_id != null) {
+            $mod = new ActicleCategoryTable();
+            $result = [
+                $this->category_id => ''
+            ];
+            $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), $this->category_id, '', $result);
+            $query->andFilterWhere(['category_id' => array_keys($result)]);
+        }
 
         return $dataProvider;
     }

@@ -3,12 +3,15 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use modava\article\ArticleModule;
+use modava\article\models\table\ActicleCategoryTable;
 
 /* @var $this yii\web\View */
 /* @var $model modava\article\models\search\ArticleSearch */
 /* @var $form yii\widgets\ActiveForm */
 
 $params = Yii::$app->getModule('article')->params['class_button_search'];
+$mod = new ActicleCategoryTable();
+$mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, '', $result);
 ?>
 
 <div class="article-search">
@@ -27,6 +30,13 @@ $params = Yii::$app->getModule('article')->params['class_button_search'];
                     'template' => '{label}<div class="input-group">{input}<button type="button" class="btn btn-light clear-value"><span class="fa fa-times"></span></button></div>{error}{hint}'
                 ])->textInput([
                     'placeholder' => $model->getAttributeLabel('title')
+                ]) ?>
+            </div>
+            <div class="col-md-3 col-sm-4 col-lg-3">
+                <?= $form->field($model, 'category_id', [
+                    'template' => '{label}<div class="input-group">{input}<button type="button" class="btn btn-light clear-value"><span class="fa fa-times"></span></button></div>{error}{hint}'
+                ])->dropDownList($result ?: [], [
+                    'prompt' => $model->getAttributeLabel('category_id')
                 ]) ?>
             </div>
         </div>

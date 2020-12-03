@@ -1,8 +1,7 @@
 <?php
 
-use modava\article\ArticleModule;
-use modava\article\widgets\NavbarWidgets;
 use common\grid\MyGridView;
+use modava\article\widgets\NavbarWidgets;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 
@@ -206,7 +205,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'template' => '{link} {update} {delete}',
                                                 'buttons' => [
                                                     'link' => function ($url, $model) {
-                                                        $link = Yii::$app->urlManagerFrontend->createUrl([$model->category->slug . '/' . $model->slug]);
+                                                        if (!class_exists('frontend\controllers\LinkRedirectController') || !method_exists('frontend\controllers\LinkController', 'actionGetLinkArticle')) return null;
+                                                        $link = Yii::$app->urlManagerFrontend->createUrl(['/link-redirect/get-link-article', 'slug' => $model->slug]);
                                                         return Html::a('<span class="glyphicon glyphicon-link"></span>', $link, [
                                                             'title' => Yii::t('backend', 'Link'),
                                                             'alia-label' => Yii::t('backend', 'Link'),

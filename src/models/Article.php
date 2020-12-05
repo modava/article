@@ -27,6 +27,7 @@ use yii\db\ActiveRecord;
  * @property int $hot
  * @property float $priority
  * @property int|null $views
+ * @property string|null $tags
  * @property string $language Language for yii2
  * @property int $created_at
  * @property int $updated_at
@@ -91,6 +92,7 @@ class Article extends ArticleTable
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleCategory::class, 'targetAttribute' => ['category_id' => 'id']],
             ['priority', 'compare', 'operator' => '<=', 'compareValue' => 1, 'message' => Yii::t('backend', 'Giá trị tối đa là 1')],
             ['priority', 'compare', 'operator' => '>=', 'compareValue' => 0, 'message' => Yii::t('backend', 'Giá trị tối thiểu là 0')],
+            [['tags'], 'safe']
         ];
     }
 
@@ -115,6 +117,7 @@ class Article extends ArticleTable
             'hot' => Yii::t('backend', 'Hot'),
             'priority' => Yii::t('backend', 'Priority'),
             'views' => Yii::t('backend', 'Views'),
+            'tags' => Yii::t('backend', 'Tags'),
             'language' => Yii::t('backend', 'Language'),
             'created_at' => Yii::t('backend', 'Created At'),
             'updated_at' => Yii::t('backend', 'Updated At'),

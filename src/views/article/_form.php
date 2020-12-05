@@ -13,6 +13,12 @@ use modava\article\models\table\ActicleCategoryTable;
 /* @var $form yii\widgets\ActiveForm */
 $mod = new ActicleCategoryTable();
 $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, '', $result);
+$css = <<< CSS
+.select2-container input[type=search] {
+    width: auto !important;
+}
+CSS;
+$this->registerCss($css);
 ?>
 <?php \backend\widgets\ToastrWidget::widget(['key' => 'toastr-' . $model->toastr_key . '-form']) ?>
     <div class="article-form">
@@ -73,7 +79,11 @@ $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, ''
                 ]) ?>
             </div>
         </div>
-
+        <?= $form->field($model, 'tags')->dropDownList(array_combine($model->tags ?: [], $model->tags ?: []), [
+            'class' => 'form-control select2 select2-multiple',
+            'multiple' => 'multiple',
+            'id' => 'input_tags'
+        ]) ?>
         <?php
         if (empty($model->getErrors()))
             $path = Yii::$app->params['article']['150x150']['folder'];
@@ -100,10 +110,17 @@ $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, ''
 
     </div>
 <?php
+$this->registerCssFile(Yii::$app->assetManager->publish('@modava-assets/vendors/select2/dist/css/select2.min.css')[1]);
+$this->registerJsFile(Yii::$app->assetManager->publish('@modava-assets/vendors/select2/dist/js/select2.full.min.js')[1], ['depends' => [\modava\article\assets\ArticleAsset::class]]);
 $urlLoadCategories = Url::toRoute(['load-categories-by-lang']);
 $urlLoadTypes = Url::toRoute(['load-types-by-lang']);
 $urlGetSlug = Url::toRoute(['generate-slug', 'id' => $model->primaryKey]);
 $script = <<< JS
+$(".select2").select2();
+$("#input_tags").select2({
+    tags: true,
+    tokenSeparators: [',', ' ']
+});
 function loadDataByLang(url, lang){
     return new Promise((resolve) => {
         $.ajax({
@@ -120,7 +137,26 @@ function loadDataByLang(url, lang){
         });
     });
 }
-$('body').on('change paste', '.article-title', function(){
+$('body').on('keyup', '.select2-container input[type=search]', function(e){
+    var ipt = $(this),
+        el = $('#input_tags');
+    if(e.keyCode === 188){
+        var tags = el.val() || [],
+            val = ipt.val().replace(',', ''),
+            all_val = $.map(el.find('option') ,function(option) {
+                return option.value;
+            });
+        ipt.val(null).focus();
+        if(val.trim() === '' || tags.includes(val)) return;
+        if(!all_val.includes(val)) {
+            all_val.push(val);
+            el.append('<option value="'+ val +'">'+ val +'</option>');
+        }
+        el.find('option[value="'+ val +'"]').prop('selected', 'selected');
+        tags.push(val);
+        el.select2('destroy').select2().select2('open').val(tags).trigger('change.select2');
+    }
+}).on('change paste', '.article-title', function(){
     var title = $(this).val() || null;
     if(title !== null){
         $.ajax({

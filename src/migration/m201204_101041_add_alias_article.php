@@ -14,11 +14,11 @@ class m201204_101041_add_alias_article extends Migration
     {
         $columns_article_category = Yii::$app->db->getTableSchema('article_category')->columns;
         if (is_array($columns_article_category) && !array_key_exists('alias', $columns_article_category)) {
-            $this->addColumn('article_category', 'alias', $this->string(255)->null());
+            $this->addColumn('article_category', 'alias', $this->string(255)->after('language')->null());
         }
         $columns_article = Yii::$app->db->getTableSchema('article')->columns;
         if (is_array($columns_article) && !array_key_exists('alias', $columns_article)) {
-            $this->addColumn('article', 'alias', $this->string(255)->null());
+            $this->addColumn('article', 'alias', $this->string(255)->after('views')->null());
         }
     }
 

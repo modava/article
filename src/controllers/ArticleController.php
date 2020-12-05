@@ -7,8 +7,10 @@ use modava\article\ArticleModule;
 use modava\article\components\MyArticleController;
 use modava\article\components\MyUpload;
 use modava\article\models\Article;
+use modava\article\models\ArticleCategory;
 use modava\article\models\search\ArticleSearch;
 use modava\article\models\table\ActicleCategoryTable;
+use modava\article\models\table\ArticleTable;
 use modava\article\models\table\ArticleTypeTable;
 use Yii;
 use yii\db\Exception;
@@ -307,6 +309,30 @@ class ArticleController extends MyArticleController
             'code' => 403,
             'msg' => 'Không có quyền truy cập chức năng này'
         ];
+    }
+
+    public function actionUpdateArticleAlias($article_category_id = null)
+    {
+        $this->recursiveUpdateArticleCategory($article_category_id);
+        return $this->redirect(['index']);
+    }
+
+    private function recursiveUpdateArticleCategory($parent_id = null)
+    {
+        $data = ArticleCategory::find()->where(['parent_id' => $parent_id])->all();
+        foreach ($data as $article_category) {
+            $article_category->save();
+            $this->recursiveUpdateArticle($article_category->primaryKey);
+            $this->recursiveUpdateArticleCategory($article_category->primaryKey);
+        }
+    }
+
+    private function recursiveUpdateArticle($category_id)
+    {
+        $data = Article::find()->where(['category_id' => $category_id])->all();
+        foreach ($data as $article) {
+            $article->save();
+        }
     }
 
     public function actionLoadCategoriesByLang($lang = null)

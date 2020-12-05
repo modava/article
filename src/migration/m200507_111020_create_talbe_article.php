@@ -32,7 +32,7 @@ class m200507_111020_create_talbe_article extends Migration
             'status' => $this->smallInteger(1)->notNull()->defaultValue(1),
             'hot' => $this->smallInteger(1)->notNull()->defaultValue(0),
             'language' => $this->string(25)->null(),
-            'views' => $this->bigInteger(20)->null(),
+            'views' => $this->bigInteger(20)->defaultValue(0),
             'created_at' => $this->integer(11)->notNull(),
             'updated_at' => $this->integer(11)->notNull(),
             'created_by' => $this->integer(11)->null(),

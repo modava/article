@@ -13,6 +13,7 @@ use modava\article\models\table\ActicleCategoryTable;
 /* @var $form yii\widgets\ActiveForm */
 $mod = new ActicleCategoryTable();
 $mod->getCategories(ActicleCategoryTable::getAllArticleCategoryArray(), null, '', $result);
+$params = Yii::$app->params;
 $css = <<< CSS
 .select2-container input[type=search] {
     width: auto !important;
@@ -27,7 +28,14 @@ $this->registerCss($css);
 
         <div class="row">
             <div class="col-md-6 col-12">
-                <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'class' => 'form-control article-title']) ?>
+                <?= $form->field($model, 'title', [
+                    'template' => '<div class="counter-content">{label} (<span class="counter">0</span>)</div>{input}{error}',
+                ])->textInput([
+                    'maxlength' => true,
+                    'class' => 'form-control article-title'
+                ])->label($model->getAttributeLabel('title'), [
+                    'class' => 'control-label custom-counter',
+                ]); ?>
             </div>
             <div class="col-md-6 col-12">
                 <?= $form->field($model, 'slug', [
@@ -64,7 +72,13 @@ $this->registerCss($css);
             </div>
         </div>
 
-        <?= $form->field($model, 'description')->textarea(['rows' => '6']); ?>
+        <?= $form->field($model, 'description', [
+            'template' => '<div class="counter-content">{label} (<span class="counter">0</span>)</div>{input}{error}',
+        ])->textarea([
+            'rows' => '6',
+        ])->label($model->getAttributeLabel('description'), [
+            'class' => 'control-label custom-counter',
+        ]); ?>
 
         <?= $form->field($model, 'content')->widget(\modava\tiny\TinyMce::class, [
             'options' => ['rows' => 15],
@@ -137,6 +151,16 @@ function loadDataByLang(url, lang){
         });
     });
 }
+$('body .custom-counter').each(function(){
+    var label = $(this),
+        ipt = label.attr('ipt-counter') || null,
+        content = label.closest('.counter-content').find('.counter') || null;
+    if(ipt === null || $(ipt).length <= 0) ipt = $('#'+ label.attr('for'));
+    if(content.length <= 0) return;
+    ipt.on('change paste keyup', function(){
+        content.text($(this).val().length);
+    });
+});
 $('body').on('keyup', '.select2-container input[type=search]', function(e){
     var ipt = $(this),
         el = $('#input_tags');

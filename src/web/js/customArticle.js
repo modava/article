@@ -78,5 +78,14 @@ $(function () {
         } else {
             input.val('').trigger('change');
         }
+    }).on('change paste keyup', '.alert-max-length', function(){
+        var el = $(this),
+            val = el.val() || "",
+            max_length = el.attr('alert-max-length') || null,
+            alert_content = el.attr('alert-content') || 'Chỉ nên để tối đa '+ max_length +' ký tự',
+            alert_el = el.parent().find('.alert-content');
+        if(max_length === null || alert_el.length <= 0) return;
+        if(val.trim().split(' ').length > parseInt(max_length)) alert_el.text(alert_content).show();
+        else alert_el.text('').hide();
     });
 });

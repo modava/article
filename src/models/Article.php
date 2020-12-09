@@ -79,7 +79,7 @@ class Article extends ArticleTable
     public function rules()
     {
         return [
-            [['title', 'content'], 'required'],
+            [['title', 'content', 'description'], 'required'],
             [['slug'], 'unique', 'targetClass' => self::class, 'targetAttribute' => 'slug'],
             [['category_id'], 'required', 'message' => Yii::t('backend', 'Danh mục không được để trống')],
             [['type_id'], 'required', 'message' => Yii::t('backend', 'Thể loại không được để trống')],

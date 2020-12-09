@@ -24,3 +24,57 @@ li.nav-item.mb-5 {
 .form-group .help-block {
     color: red;
 }
+
+.alert-parent {
+    position: relative;
+}
+
+.alert-parent .alert-content {
+    position: absolute;
+    bottom: -40px;
+    right: 0;
+    line-height: 25px;
+    padding: 4px 10px 4px 7px;
+    border: solid 1px #666;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 3px 3px 6px #ccc;
+    z-index: 9;
+    display: none;
+}
+
+.alert-content:before {
+    content: "!";
+    display: inline-block;
+    top: 50%;
+    left: 5px;
+    background: #fea129;
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 3px;
+    transform: translateY(1px);
+}
+
+.alert-content:after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 13px;
+    width: 10px;
+    height: 10px;
+    border-top: solid 1px #666;
+    border-right: solid 1px #666;
+    transform: rotate(-45deg);
+    background: #fff;
+    z-index: 1;
+}
+
+.counter-content {
+    font-size: 13px;
+}

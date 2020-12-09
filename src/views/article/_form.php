@@ -151,16 +151,6 @@ function loadDataByLang(url, lang){
         });
     });
 }
-$('body .custom-counter').each(function(){
-    var label = $(this),
-        ipt = label.attr('ipt-counter') || null,
-        content = label.closest('.counter-content').find('.counter') || null;
-    if(ipt === null || $(ipt).length <= 0) ipt = $('#'+ label.attr('for'));
-    if(content.length <= 0) return;
-    ipt.on('change paste keyup', function(){
-        content.text($(this).val().length);
-    });
-});
 $('body').on('keyup', '.select2-container input[type=search]', function(e){
     var ipt = $(this),
         el = $('#input_tags');

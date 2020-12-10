@@ -2,11 +2,11 @@
 
 namespace modava\article\models\table;
 
+use backend\components\MyModel;
 use modava\article\models\ArticleCategory;
 use modava\article\models\ArticleType;
 use modava\article\models\query\ArticleQuery;
 use common\models\User;
-use Yii;
 
 /**
  * This is the model class for table "article".
@@ -31,7 +31,7 @@ use Yii;
  * @property int|null $updated_by
  *
  */
-class ArticleTable extends \yii\db\ActiveRecord
+class ArticleTable extends MyModel
 {
     const STATUS_PUBLISHED = 1;
     const STATUS_DISABLED = 0;

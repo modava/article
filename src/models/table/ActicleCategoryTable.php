@@ -2,12 +2,12 @@
 
 namespace modava\article\models\table;
 
+use backend\components\MyModel;
 use cheatsheet\Time;
 use modava\article\models\query\ArticleCategoryQuery;
 use Yii;
-use yii\db\ActiveRecord;
 
-class ActicleCategoryTable extends ActiveRecord
+class ActicleCategoryTable extends MyModel
 {
     const STATUS_PUBLISHED = 1;
     const STATUS_DISABLED = 0;

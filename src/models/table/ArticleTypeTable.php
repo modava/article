@@ -2,12 +2,13 @@
 
 namespace modava\article\models\table;
 
+use backend\components\MyModel;
 use cheatsheet\Time;
 use modava\article\models\query\ArticleTypeQuery;
 use Yii;
 
 
-class ArticleTypeTable extends \yii\db\ActiveRecord
+class ArticleTypeTable extends MyModel
 {
     const STATUS_PUBLISHED = 1;
     const STATUS_DISABLED = 0;

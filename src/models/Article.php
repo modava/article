@@ -79,7 +79,7 @@ class Article extends ArticleTable
     public function rules()
     {
         return [
-            [['title', 'content', 'description'], 'required'],
+            [['title', 'content', 'description', 'tags'], 'required'],
             [['slug'], 'unique', 'targetClass' => self::class, 'targetAttribute' => 'slug'],
             [['category_id'], 'required', 'message' => Yii::t('backend', 'Danh mục không được để trống')],
             [['type_id'], 'required', 'message' => Yii::t('backend', 'Thể loại không được để trống')],
@@ -92,7 +92,6 @@ class Article extends ArticleTable
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleCategory::class, 'targetAttribute' => ['category_id' => 'id']],
             ['priority', 'compare', 'operator' => '<=', 'compareValue' => 1, 'message' => Yii::t('backend', 'Giá trị tối đa là 1')],
             ['priority', 'compare', 'operator' => '>=', 'compareValue' => 0, 'message' => Yii::t('backend', 'Giá trị tối thiểu là 0')],
-            [['tags'], 'safe']
         ];
     }
 

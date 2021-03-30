@@ -75,6 +75,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Yii::$app->params['availableLocales'][$model->language];
                             }
                         ],
+                        [
+                            'attribute' => 'key_work',
+                            'value' => function ($model) {
+                                if ($model->key_work == null)
+                                    return null;
+                                return implode(', ', $model->key_work);
+                            }
+                        ],
                         'created_at:datetime',
                         'updated_at:datetime',
                         [

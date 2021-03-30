@@ -20,6 +20,7 @@ use Yii;
  * @property int|null $parent_id
  * @property string|null $image
  * @property string|null $description
+ * @property string|null $key_work
  * @property int|null $position
  * @property string|null $ads_pixel
  * @property string|null $ads_session
@@ -102,7 +103,7 @@ class ArticleCategory extends ActicleCategoryTable
     public function rules()
     {
         return [
-            [['title'], 'required'],
+            [['title', 'key_work'], 'required'],
             [['parent_id', 'position', 'status',], 'integer'],
             [['ads_pixel', 'ads_session', 'language'], 'string'],
             [['title', 'slug', 'image', 'description'], 'string', 'max' => 255],
@@ -121,6 +122,7 @@ class ArticleCategory extends ActicleCategoryTable
             'parent_id' => Yii::t('backend', 'Parent ID'),
             'image' => Yii::t('backend', 'Image'),
             'description' => Yii::t('backend', 'Description'),
+            'key_work' => Yii::t('backend', 'Key work'),
             'position' => Yii::t('backend', 'Position'),
             'ads_pixel' => Yii::t('backend', 'Ads Pixel'),
             'ads_session' => Yii::t('backend', 'Ads Session'),

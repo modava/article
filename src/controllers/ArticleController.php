@@ -3,14 +3,12 @@
 namespace modava\article\controllers;
 
 use backend\components\MyComponent;
-use modava\article\ArticleModule;
 use modava\article\components\MyArticleController;
 use modava\article\components\MyUpload;
 use modava\article\models\Article;
 use modava\article\models\ArticleCategory;
 use modava\article\models\search\ArticleSearch;
 use modava\article\models\table\ActicleCategoryTable;
-use modava\article\models\table\ArticleTable;
 use modava\article\models\table\ArticleTypeTable;
 use Yii;
 use yii\db\Exception;

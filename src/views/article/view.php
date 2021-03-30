@@ -87,6 +87,19 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Yii::$app->params['availableLocales'][$model->language];
                             },
                         ],
+                        [
+                            'attribute' => 'alias',
+                            'visible' => Yii::$app->user->can(\modava\auth\models\User::DEV)
+                        ],
+                        [
+                            'attribute' => 'tags',
+                            'label' => 'Key work',
+                            'value' => function ($model) {
+                                if ($model->tags == null)
+                                    return null;
+                                return implode(', ', $model->tags);
+                            }
+                        ],
                         'created_at:datetime',
                         'updated_at:datetime',
                         [
